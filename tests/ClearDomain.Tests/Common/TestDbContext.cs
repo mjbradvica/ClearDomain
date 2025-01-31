@@ -28,6 +28,8 @@ namespace ClearDomain.Tests.Common
             IntIdentityUsers = Set<TestIntIdentityUser>();
             LongIdentityUsers = Set<TestLongIdentityUser>();
             StringIdentityUsers = Set<TestStringIdentityUser>();
+
+            Database.EnsureCreated();
         }
 
         /// <summary>
