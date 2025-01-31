@@ -14,10 +14,10 @@ using MongoDB.Driver;
 
 namespace ClearDomain.Tests.LongPrimary
 {
-	/// <summary>
-	/// Long entity integration tests.
-	/// </summary>
-	[TestClass]
+    /// <summary>
+    /// Long entity integration tests.
+    /// </summary>
+    [TestClass]
     public class LongEntityIntegrationTests : BaseIntegrationTest
     {
         /// <summary>

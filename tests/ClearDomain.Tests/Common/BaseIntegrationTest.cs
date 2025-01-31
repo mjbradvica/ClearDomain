@@ -12,10 +12,10 @@ using MongoDB.Bson.Serialization.Serializers;
 
 namespace ClearDomain.Tests.Common
 {
-	/// <summary>
-	/// Base class for integration tests.
-	/// </summary>
-	public class BaseIntegrationTest
+    /// <summary>
+    /// Base class for integration tests.
+    /// </summary>
+    public class BaseIntegrationTest
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="BaseIntegrationTest"/> class.
