@@ -27,6 +27,8 @@ namespace ClearDomain.Tests.LongPrimary
         [TestMethod]
         public async Task Entity_EF_CanBePersisted()
         {
+            await TestHelpers.ClearSqlDatabase();
+
             await using (var context = new TestDbContext())
             {
                 await context.LongEntities.AddAsync(new TestLongEntity());
@@ -42,6 +44,8 @@ namespace ClearDomain.Tests.LongPrimary
         [TestMethod]
         public async Task Entity_EF_CanBeRetrieved()
         {
+            await TestHelpers.ClearSqlDatabase();
+
             await using (var context = new TestDbContext())
             {
                 await context.LongEntities.AddAsync(new TestLongEntity());
@@ -65,6 +69,8 @@ namespace ClearDomain.Tests.LongPrimary
         [TestMethod]
         public async Task IdentityUser_EF_CanBePersisted()
         {
+            await TestHelpers.ClearSqlDatabase();
+
             await using (var context = new TestDbContext())
             {
                 var user = new TestLongIdentityUser();
@@ -82,6 +88,8 @@ namespace ClearDomain.Tests.LongPrimary
         [TestMethod]
         public async Task IdentityUser_EF_CanBeRetrieved()
         {
+            await TestHelpers.ClearSqlDatabase();
+
             await using (var context = new TestDbContext())
             {
                 await context.LongIdentityUsers.AddAsync(new TestLongIdentityUser());
@@ -105,6 +113,8 @@ namespace ClearDomain.Tests.LongPrimary
         [TestMethod]
         public async Task Entity_Dapper_CanBePersisted()
         {
+            await TestHelpers.ClearSqlDatabase();
+
             await using (var connection = new SqlConnection(TestHelpers.ConnectionString()))
             {
                 await connection.OpenAsync();
@@ -124,6 +134,8 @@ namespace ClearDomain.Tests.LongPrimary
         [TestMethod]
         public async Task Entity_Dapper_CanBeRetrieved()
         {
+            await TestHelpers.ClearSqlDatabase();
+
             const int id = 1;
 
             await using (var connection = new SqlConnection(TestHelpers.ConnectionString()))
@@ -157,6 +169,8 @@ namespace ClearDomain.Tests.LongPrimary
         [TestMethod]
         public async Task Entity_ADO_CanBePersisted()
         {
+            await TestHelpers.ClearSqlDatabase();
+
             await using (var connection = new SqlConnection(TestHelpers.ConnectionString()))
             {
                 await connection.OpenAsync();
@@ -182,6 +196,8 @@ namespace ClearDomain.Tests.LongPrimary
         [TestMethod]
         public async Task Entity_ADO_CanBeRetrieved()
         {
+            await TestHelpers.ClearSqlDatabase();
+
             const int id = 1;
 
             await using (var connection = new SqlConnection(TestHelpers.ConnectionString()))

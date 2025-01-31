@@ -3,6 +3,7 @@
 // </copyright>
 
 using System;
+using System.Threading.Tasks;
 using ClearDomain.Tests.GuidPrimary;
 using ClearDomain.Tests.IntPrimary;
 using ClearDomain.Tests.LongPrimary;
@@ -17,17 +18,24 @@ namespace ClearDomain.Tests.Common
     public class TestHelpers
     {
         /// <summary>
+        /// Clears sql database.
+        /// </summary>
+        /// <returns>A <see cref="Task"/> representing the result of the asynchronous operation.</returns>
+        public static async Task ClearSqlDatabase()
+        {
+            await using (var context = new TestDbContext())
+            {
+                await context.Database.EnsureDeletedAsync();
+
+                await context.Database.EnsureCreatedAsync();
+            }
+        }
+
+        /// <summary>
         /// Clears all test tables.
         /// </summary>
         public static void ClearDatabase()
         {
-            using (var context = new TestDbContext())
-            {
-                context.Database.EnsureDeleted();
-
-                context.Database.EnsureCreated();
-            }
-
             var client = new MongoClient(MongoConnectionString());
 
             client.GetDatabase("clear_domain").GetCollection<TestGuidEntity>("guid_entities")
