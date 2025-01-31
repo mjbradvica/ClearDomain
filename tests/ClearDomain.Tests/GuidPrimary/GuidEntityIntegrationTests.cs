@@ -31,13 +31,6 @@ namespace ClearDomain.Tests.GuidPrimary
 
             await using (var context = new TestDbContext())
             {
-                await context.Database.EnsureDeletedAsync();
-
-                await context.Database.EnsureCreatedAsync();
-            }
-
-            await using (var context = new TestDbContext())
-            {
                 await context.GuidEntities.AddAsync(new TestGuidEntity(Guid.NewGuid()));
 
                 await context.SaveChangesAsync();

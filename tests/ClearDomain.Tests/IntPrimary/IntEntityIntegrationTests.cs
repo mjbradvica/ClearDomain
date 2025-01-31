@@ -119,8 +119,6 @@ namespace ClearDomain.Tests.IntPrimary
             {
                 await connection.OpenAsync();
 
-                var entity = new TestIntEntity();
-
                 await connection.ExecuteAsync("SET IDENTITY_INSERT dbo.IntEntities ON; INSERT INTO dbo.IntEntities (Id) VALUES ('1');");
 
                 await connection.CloseAsync();
@@ -141,8 +139,6 @@ namespace ClearDomain.Tests.IntPrimary
             await using (var connection = new SqlConnection(TestHelpers.ConnectionString()))
             {
                 await connection.OpenAsync();
-
-                var entity = new TestIntEntity(id);
 
                 await connection.ExecuteAsync($"SET IDENTITY_INSERT dbo.IntEntities ON; INSERT INTO dbo.IntEntities (Id) VALUES ('{id}');");
 

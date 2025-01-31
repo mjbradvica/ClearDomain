@@ -119,8 +119,6 @@ namespace ClearDomain.Tests.LongPrimary
             {
                 await connection.OpenAsync();
 
-                var entity = new TestLongEntity();
-
                 await connection.ExecuteAsync("SET IDENTITY_INSERT dbo.LongEntities ON; INSERT INTO dbo.LongEntities (Id) VALUES ('1');");
 
                 await connection.CloseAsync();
@@ -141,8 +139,6 @@ namespace ClearDomain.Tests.LongPrimary
             await using (var connection = new SqlConnection(TestHelpers.ConnectionString()))
             {
                 await connection.OpenAsync();
-
-                var entity = new TestLongEntity(id);
 
                 await connection.ExecuteAsync($"SET IDENTITY_INSERT dbo.LongEntities ON; INSERT INTO dbo.LongEntities (Id) VALUES ('{id}');");
 

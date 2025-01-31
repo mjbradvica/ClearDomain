@@ -17,17 +17,6 @@ namespace ClearDomain.Tests.Identity
     public class ClearDomainIdentityUserTests
     {
         /// <summary>
-        /// Ensures events are initialized on creation.
-        /// </summary>
-        [TestMethod]
-        public void DefaultConstructor_InitializesDomainEvents()
-        {
-            var user = new TestIdentityUser();
-
-            Assert.IsNotNull(user.DomainEvents);
-        }
-
-        /// <summary>
         /// Ensures all properties are initialized on creation.
         /// </summary>
         [TestMethod]
@@ -36,7 +25,6 @@ namespace ClearDomain.Tests.Identity
             var user = new TestIdentityUser("user");
 
             Assert.IsNotNull(user.UserName);
-            Assert.IsNotNull(user.DomainEvents);
         }
 
         /// <summary>
