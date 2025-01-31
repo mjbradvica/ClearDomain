@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -21,6 +21,7 @@ jobs:
             6.0.x
             7.0.x
             8.0.x
+            9.0.x
 
       - name: Use Node.js
         uses: actions/setup-node@v4
@@ -28,13 +29,13 @@ jobs:
           node-version: latest
 
       - name: Start MongoDB
-        uses: supercharge/mongodb-github-action@1.10.0
+        uses: supercharge/mongodb-github-action@1.12.0
         with:
           mongodb-version: 7.0
           mongodb-port: 27017
 
       - name: Install SQL Server
-        uses: Particular/install-sql-server-action@v1.1.0
+        uses: Particular/install-sql-server-action@v1.2.0
         with:
           connection-string-env-var: TEST_CONNECTION_STRING
           catalog: ClearDomain
