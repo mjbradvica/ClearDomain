@@ -25,19 +25,9 @@ namespace ClearDomain.Tests.Common
         {
             await using (var context = new TestDbContext())
             {
-                // await context.Database.EnsureDeletedAsync();
+                await context.Database.EnsureDeletedAsync();
 
-                // await context.Database.EnsureCreatedAsync();
-                context.RemoveRange(context.GuidEntities);
-                context.RemoveRange(context.IntEntities);
-                context.RemoveRange(context.LongEntities);
-                context.RemoveRange(context.StringEntities);
-                context.RemoveRange(context.GuidIdentityUsers);
-                context.RemoveRange(context.IntIdentityUsers);
-                context.RemoveRange(context.LongEntities);
-                context.RemoveRange(context.StringIdentityUsers);
-
-                await context.SaveChangesAsync();
+                await context.Database.EnsureCreatedAsync();
             }
         }
 
