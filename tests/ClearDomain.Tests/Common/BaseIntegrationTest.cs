@@ -19,7 +19,7 @@ namespace ClearDomain.Tests.Common
         /// <summary>
         /// Initializes a new instance of the <see cref="BaseIntegrationTest"/> class.
         /// </summary>
-        public BaseIntegrationTest()
+        protected BaseIntegrationTest()
         {
             if (BsonSerializer.LookupSerializer(typeof(GuidSerializer)) == null)
             {

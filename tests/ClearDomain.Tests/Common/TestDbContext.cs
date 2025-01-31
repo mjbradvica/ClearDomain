@@ -20,8 +20,6 @@ namespace ClearDomain.Tests.Common
         /// </summary>
         public TestDbContext()
         {
-            Database.EnsureCreated();
-
             GuidEntities = Set<TestGuidEntity>();
             IntEntities = Set<TestIntEntity>();
             LongEntities = Set<TestLongEntity>();
