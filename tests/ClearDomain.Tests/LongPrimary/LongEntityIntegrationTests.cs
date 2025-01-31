@@ -3,21 +3,21 @@
 // </copyright>
 
 using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 using ClearDomain.Tests.Common;
 using Dapper;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MongoDB.Driver;
 
 namespace ClearDomain.Tests.LongPrimary
 {
-    /// <summary>
-    /// Long entity integration tests.
-    /// </summary>
-    [TestClass]
+	/// <summary>
+	/// Long entity integration tests.
+	/// </summary>
+	[TestClass]
     public class LongEntityIntegrationTests : BaseIntegrationTest
     {
         /// <summary>
