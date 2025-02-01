@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ClearDomain.Common
 {
@@ -35,13 +36,13 @@ namespace ClearDomain.Common
         }
 
         /// <inheritdoc />
-        public IEnumerable<IDomainEvent> DomainEvents => _domainEvents;
+        public IEnumerable<IDomainEvent> DomainEvents => _domainEvents.AsEnumerable();
 
         /// <summary>
         /// Appends a domain event to the current list.
         /// </summary>
         /// <param name="domainEvent">A <see cref="IDomainEvent"/> to append.</param>
-        public virtual void AppendDomainEvent(IDomainEvent domainEvent)
+        public void AppendDomainEvent(IDomainEvent domainEvent)
         {
             _domainEvents.Add(domainEvent);
         }
