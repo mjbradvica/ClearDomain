@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using ClearDomain.Common;
 using Microsoft.AspNetCore.Identity;
 
@@ -37,7 +38,7 @@ namespace ClearDomain.Identity.Common
         }
 
         /// <inheritdoc />
-        public IEnumerable<IDomainEvent> DomainEvents => _domainEvents;
+        public IEnumerable<IDomainEvent> DomainEvents => _domainEvents.AsEnumerable();
 
         /// <summary>
         /// Determines equality for another entity.
@@ -87,7 +88,7 @@ namespace ClearDomain.Identity.Common
         /// Appends a domain event to the current list.
         /// </summary>
         /// <param name="domainEvent">A <see cref="IDomainEvent"/> to append.</param>
-        public virtual void AppendDomainEvent(IDomainEvent domainEvent)
+        public void AppendDomainEvent(IDomainEvent domainEvent)
         {
             _domainEvents.Add(domainEvent);
         }
