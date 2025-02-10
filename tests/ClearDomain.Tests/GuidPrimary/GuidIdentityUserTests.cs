@@ -2,7 +2,6 @@
 // Copyright (c) Simplex Software LLC. All rights reserved.
 // </copyright>
 
-using System;
 using ClearDomain.GuidPrimary;
 using ClearDomain.Identity.Common;
 using ClearDomain.Identity.GuidPrimary;

@@ -2,8 +2,6 @@
 // Copyright (c) Simplex Software LLC. All rights reserved.
 // </copyright>
 
-using System;
-using System.Threading.Tasks;
 using ClearDomain.Tests.GuidPrimary;
 using ClearDomain.Tests.IntPrimary;
 using ClearDomain.Tests.LongPrimary;
