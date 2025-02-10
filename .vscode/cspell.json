@@ -1,9 +1,14 @@
 {
     "words": [
         "Bradvica",
+        "buildtransitive",
+        "contentfiles",
         "hashcode",
         "Mediat",
         "minidisc",
-        "nameof"
+        "msbuild",
+        "nameof",
+        "nupkg",
+        "stylecop"
     ]
 }

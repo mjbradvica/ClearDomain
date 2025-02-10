@@ -29,13 +29,6 @@ jobs:
           mongodb-version: 8.0
           mongodb-port: 27017
 
-      - name: Install SQL Server
-        uses: Particular/install-sql-server-action@v1.2.0
-        with:
-          connection-string-env-var: TEST_CONNECTION_STRING
-          catalog: ClearDomain
-          extra-params: "TrustServerCertificate=true;"
-
       - name: Restore
         run: dotnet restore
 
@@ -46,10 +39,10 @@ jobs:
         run: dotnet build --no-restore -c Release
 
       - name: Test
-        run: dotnet test --no-build --verbosity normal -c Release /p:CollectCoverage=true /p:Threshold=100 /p:ThresholdType=branch
+        run: dotnet test --no-build --no-restore -v normal -c Release /p:CollectCoverage=true /p:Threshold=100 /p:ThresholdType=branch
 
       - name: Pack
-        run: dotnet pack --no-build -c Release -o .
+        run: dotnet pack --no-build --no-restore -c Release -o .
 
       - name: Publish
         run: dotnet nuget push ClearDomain.*.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_KEY }} --skip-duplicate
