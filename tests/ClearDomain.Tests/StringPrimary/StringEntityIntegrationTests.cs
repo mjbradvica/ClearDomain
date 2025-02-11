@@ -24,9 +24,7 @@ namespace ClearDomain.Tests.StringPrimary
         [TestMethod]
         public async Task Entity_EF_CanBePersisted()
         {
-            await TestHelpers.ClearSqlDatabase();
-
-            await using (var context = new TestDbContext())
+            await using (var context = new TestDbContext(ContextOptions))
             {
                 await context.StringEntities.AddAsync(new TestStringEntity());
 
@@ -41,16 +39,14 @@ namespace ClearDomain.Tests.StringPrimary
         [TestMethod]
         public async Task Entity_EF_CanBeRetrieved()
         {
-            await TestHelpers.ClearSqlDatabase();
-
-            await using (var context = new TestDbContext())
+            await using (var context = new TestDbContext(ContextOptions))
             {
                 await context.StringEntities.AddAsync(new TestStringEntity());
 
                 await context.SaveChangesAsync();
             }
 
-            await using (var context = new TestDbContext())
+            await using (var context = new TestDbContext(ContextOptions))
             {
                 var result = await context.StringEntities.ToListAsync();
 
@@ -66,9 +62,7 @@ namespace ClearDomain.Tests.StringPrimary
         [TestMethod]
         public async Task IdentityUser_EF_CanBePersisted()
         {
-            await TestHelpers.ClearSqlDatabase();
-
-            await using (var context = new TestDbContext())
+            await using (var context = new TestDbContext(ContextOptions))
             {
                 var user = new TestStringIdentityUser
                 {
@@ -88,18 +82,16 @@ namespace ClearDomain.Tests.StringPrimary
         [TestMethod]
         public async Task IdentityUser_EF_CanBeRetrieved()
         {
-            await TestHelpers.ClearSqlDatabase();
-
             var id = Guid.NewGuid().ToString();
 
-            await using (var context = new TestDbContext())
+            await using (var context = new TestDbContext(ContextOptions))
             {
                 await context.StringIdentityUsers.AddAsync(new TestStringIdentityUser { Id = id });
 
                 await context.SaveChangesAsync();
             }
 
-            await using (var context = new TestDbContext())
+            await using (var context = new TestDbContext(ContextOptions))
             {
                 var result = await context.StringIdentityUsers.FindAsync(id);
 

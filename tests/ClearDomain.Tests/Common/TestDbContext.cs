@@ -18,7 +18,9 @@ namespace ClearDomain.Tests.Common
         /// <summary>
         /// Initializes a new instance of the <see cref="TestDbContext"/> class.
         /// </summary>
-        public TestDbContext()
+        /// <param name="options">A <see cref="DbContextOptions"/> class.</param>
+        public TestDbContext(DbContextOptions options)
+            : base(options)
         {
             GuidEntities = Set<TestGuidEntity>();
             IntEntities = Set<TestIntEntity>();
@@ -73,14 +75,10 @@ namespace ClearDomain.Tests.Common
         public DbSet<TestStringIdentityUser> StringIdentityUsers { get; }
 
         /// <inheritdoc />
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer(TestHelpers.ConnectionString());
-        }
-
-        /// <inheritdoc />
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<TestIntEntity>()
                 .Property(entity => entity.Id)
                 .ValueGeneratedOnAdd();

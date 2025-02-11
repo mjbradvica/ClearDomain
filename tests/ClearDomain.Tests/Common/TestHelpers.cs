@@ -6,6 +6,7 @@ using ClearDomain.Tests.GuidPrimary;
 using ClearDomain.Tests.IntPrimary;
 using ClearDomain.Tests.LongPrimary;
 using ClearDomain.Tests.StringPrimary;
+using Microsoft.Data.SqlClient;
 using MongoDB.Driver;
 
 namespace ClearDomain.Tests.Common
@@ -15,17 +16,45 @@ namespace ClearDomain.Tests.Common
     /// </summary>
     public class TestHelpers
     {
+        private static readonly Dictionary<string, string> Columns = new Dictionary<string, string>
+        {
+            { "GuidEntities", "uniqueidentifier" },
+            { "IntEntities", "int" },
+            { "LongEntities", "bigint" },
+            { "StringEntities", "varchar(100)" },
+        };
+
         /// <summary>
         /// Clears sql database.
         /// </summary>
         /// <returns>A <see cref="Task"/> representing the result of the asynchronous operation.</returns>
         public static async Task ClearSqlDatabase()
         {
-            await using (var context = new TestDbContext())
+            foreach (var pair in Columns)
             {
-                await context.Database.EnsureDeletedAsync();
+                await using (var connection = new SqlConnection(ConnectionString()))
+                {
+                    await connection.OpenAsync();
 
-                await context.Database.EnsureCreatedAsync();
+                    var command = new SqlCommand($"DROP TABLE IF EXISTS [dbo].[{pair.Key}];", connection);
+
+                    await command.ExecuteNonQueryAsync();
+
+                    await connection.CloseAsync();
+                }
+
+                await using (var connection = new SqlConnection(ConnectionString()))
+                {
+                    await connection.OpenAsync();
+
+                    var sql = pair.Value.Contains("int") ? $"CREATE TABLE {pair.Key} (Id {pair.Value} IDENTITY(1,1) PRIMARY KEY);" : $"CREATE TABLE {pair.Key} (Id {pair.Value} NOT NULL PRIMARY KEY);";
+
+                    var command = new SqlCommand(sql, connection);
+
+                    await command.ExecuteNonQueryAsync();
+
+                    await connection.CloseAsync();
+                }
             }
         }
 

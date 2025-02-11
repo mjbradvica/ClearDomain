@@ -26,7 +26,7 @@ namespace ClearDomain.Tests.IntPrimary
         {
             await TestHelpers.ClearSqlDatabase();
 
-            await using (var context = new TestDbContext())
+            await using (var context = new TestDbContext(ContextOptions))
             {
                 await context.IntEntities.AddAsync(new TestIntEntity());
 
@@ -43,14 +43,14 @@ namespace ClearDomain.Tests.IntPrimary
         {
             await TestHelpers.ClearSqlDatabase();
 
-            await using (var context = new TestDbContext())
+            await using (var context = new TestDbContext(ContextOptions))
             {
                 await context.IntEntities.AddAsync(new TestIntEntity());
 
                 await context.SaveChangesAsync();
             }
 
-            await using (var context = new TestDbContext())
+            await using (var context = new TestDbContext(ContextOptions))
             {
                 var result = await context.IntEntities.ToListAsync();
 
@@ -68,7 +68,7 @@ namespace ClearDomain.Tests.IntPrimary
         {
             await TestHelpers.ClearSqlDatabase();
 
-            await using (var context = new TestDbContext())
+            await using (var context = new TestDbContext(ContextOptions))
             {
                 var user = new TestIntIdentityUser();
 
@@ -87,14 +87,14 @@ namespace ClearDomain.Tests.IntPrimary
         {
             await TestHelpers.ClearSqlDatabase();
 
-            await using (var context = new TestDbContext())
+            await using (var context = new TestDbContext(ContextOptions))
             {
                 await context.IntIdentityUsers.AddAsync(new TestIntIdentityUser());
 
                 await context.SaveChangesAsync();
             }
 
-            await using (var context = new TestDbContext())
+            await using (var context = new TestDbContext(ContextOptions))
             {
                 var result = await context.IntIdentityUsers.ToListAsync();
 

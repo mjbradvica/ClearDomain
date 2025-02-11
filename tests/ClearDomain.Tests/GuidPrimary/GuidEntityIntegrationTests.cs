@@ -23,9 +23,7 @@ namespace ClearDomain.Tests.GuidPrimary
         [TestMethod]
         public async Task Entity_EF_CanBePersisted()
         {
-            await TestHelpers.ClearSqlDatabase();
-
-            await using (var context = new TestDbContext())
+            await using (var context = new TestDbContext(ContextOptions))
             {
                 await context.GuidEntities.AddAsync(new TestGuidEntity(Guid.NewGuid()));
 
@@ -40,18 +38,16 @@ namespace ClearDomain.Tests.GuidPrimary
         [TestMethod]
         public async Task Entity_EF_CanBeRetrieved()
         {
-            await TestHelpers.ClearSqlDatabase();
-
             var id = Guid.NewGuid();
 
-            await using (var context = new TestDbContext())
+            await using (var context = new TestDbContext(ContextOptions))
             {
                 await context.GuidEntities.AddAsync(new TestGuidEntity(id));
 
                 await context.SaveChangesAsync();
             }
 
-            await using (var context = new TestDbContext())
+            await using (var context = new TestDbContext(ContextOptions))
             {
                 var result = await context.GuidEntities.FindAsync(id);
 
@@ -67,9 +63,7 @@ namespace ClearDomain.Tests.GuidPrimary
         [TestMethod]
         public async Task IdentityUser_EF_CanBePersisted()
         {
-            await TestHelpers.ClearSqlDatabase();
-
-            await using (var context = new TestDbContext())
+            await using (var context = new TestDbContext(ContextOptions))
             {
                 var user = new TestGuidIdentityUser
                 {
@@ -89,18 +83,16 @@ namespace ClearDomain.Tests.GuidPrimary
         [TestMethod]
         public async Task IdentityUser_EF_CanBeRetrieved()
         {
-            await TestHelpers.ClearSqlDatabase();
-
             var id = Guid.NewGuid();
 
-            await using (var context = new TestDbContext())
+            await using (var context = new TestDbContext(ContextOptions))
             {
                 await context.GuidIdentityUsers.AddAsync(new TestGuidIdentityUser { Id = id });
 
                 await context.SaveChangesAsync();
             }
 
-            await using (var context = new TestDbContext())
+            await using (var context = new TestDbContext(ContextOptions))
             {
                 var result = await context.GuidIdentityUsers.FindAsync(id);
 
@@ -116,8 +108,6 @@ namespace ClearDomain.Tests.GuidPrimary
         [TestMethod]
         public async Task Entity_Dapper_CanBePersisted()
         {
-            await TestHelpers.ClearSqlDatabase();
-
             await using (var connection = new SqlConnection(TestHelpers.ConnectionString()))
             {
                 await connection.OpenAsync();
