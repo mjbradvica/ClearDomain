@@ -24,9 +24,13 @@ namespace ClearDomain.Tests.GuidPrimary
             {
                 await connection.OpenAsync();
 
+                var transaction = connection.BeginTransaction();
+
                 var entity = new TestGuidEntity(Guid.NewGuid());
 
-                await connection.ExecuteAsync($"INSERT INTO dbo.GuidEntities VALUES ('{entity.Id}');");
+                await connection.ExecuteAsync($"INSERT INTO dbo.GuidEntities VALUES ('{entity.Id}');", null, transaction);
+
+                await transaction.CommitAsync();
 
                 await connection.CloseAsync();
             }
@@ -45,9 +49,13 @@ namespace ClearDomain.Tests.GuidPrimary
             {
                 await connection.OpenAsync();
 
+                var transaction = connection.BeginTransaction();
+
                 var entity = new TestGuidEntity(id);
 
-                await connection.ExecuteAsync($"INSERT INTO dbo.GuidEntities VALUES ('{entity.Id}');");
+                await connection.ExecuteAsync($"INSERT INTO dbo.GuidEntities VALUES ('{entity.Id}');", null, transaction);
+
+                await transaction.CommitAsync();
 
                 await connection.CloseAsync();
             }

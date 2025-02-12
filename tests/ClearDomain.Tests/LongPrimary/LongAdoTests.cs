@@ -24,7 +24,11 @@ namespace ClearDomain.Tests.LongPrimary
             {
                 await connection.OpenAsync();
 
-                await connection.ExecuteAsync("SET IDENTITY_INSERT dbo.LongEntities ON; INSERT INTO dbo.LongEntities (Id) VALUES ('1');");
+                var transaction = connection.BeginTransaction();
+
+                await connection.ExecuteAsync("SET IDENTITY_INSERT dbo.LongEntities ON; INSERT INTO dbo.LongEntities (Id) VALUES ('1');", null, transaction);
+
+                await transaction.CommitAsync();
 
                 await connection.CloseAsync();
             }
@@ -37,13 +41,17 @@ namespace ClearDomain.Tests.LongPrimary
         [TestMethod]
         public async Task Entity_Dapper_CanBeRetrieved()
         {
-            const int id = 1;
+            const int id = 999;
 
             await using (var connection = new SqlConnection(TestHelpers.ConnectionString()))
             {
                 await connection.OpenAsync();
 
-                await connection.ExecuteAsync($"SET IDENTITY_INSERT dbo.LongEntities ON; INSERT INTO dbo.LongEntities (Id) VALUES ('{id}');");
+                var transaction = connection.BeginTransaction();
+
+                await connection.ExecuteAsync($"SET IDENTITY_INSERT dbo.LongEntities ON; INSERT INTO dbo.LongEntities (Id) VALUES ('{id}');", null, transaction);
+
+                await transaction.CommitAsync();
 
                 await connection.CloseAsync();
             }
@@ -93,7 +101,7 @@ namespace ClearDomain.Tests.LongPrimary
         [TestMethod]
         public async Task Entity_ADO_CanBeRetrieved()
         {
-            const int id = 1;
+            const int id = 9999;
 
             await using (var connection = new SqlConnection(TestHelpers.ConnectionString()))
             {

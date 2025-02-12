@@ -37,7 +37,7 @@ namespace ClearDomain.Tests.IntPrimary
         [TestMethod]
         public async Task Entity_Dapper_CanBeRetrieved()
         {
-            const int id = 1;
+            const int id = 999;
 
             await using (var connection = new SqlConnection(TestHelpers.ConnectionString()))
             {
@@ -93,7 +93,7 @@ namespace ClearDomain.Tests.IntPrimary
         [TestMethod]
         public async Task Entity_ADO_CanBeRetrieved()
         {
-            const int id = 1;
+            const int id = 9999;
 
             await using (var connection = new SqlConnection(TestHelpers.ConnectionString()))
             {

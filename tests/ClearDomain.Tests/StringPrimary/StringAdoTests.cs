@@ -24,9 +24,13 @@ namespace ClearDomain.Tests.StringPrimary
             {
                 await connection.OpenAsync();
 
+                var transaction = connection.BeginTransaction();
+
                 var entity = new TestStringEntity();
 
-                await connection.ExecuteAsync($"INSERT INTO dbo.StringEntities VALUES ('{entity.Id}');");
+                await connection.ExecuteAsync($"INSERT INTO dbo.StringEntities VALUES ('{entity.Id}');", null, transaction);
+
+                await transaction.CommitAsync();
 
                 await connection.CloseAsync();
             }
@@ -45,9 +49,13 @@ namespace ClearDomain.Tests.StringPrimary
             {
                 await connection.OpenAsync();
 
+                var transaction = connection.BeginTransaction();
+
                 var entity = new TestStringEntity(id);
 
-                await connection.ExecuteAsync($"INSERT INTO dbo.StringEntities VALUES ('{entity.Id}');");
+                await connection.ExecuteAsync($"INSERT INTO dbo.StringEntities VALUES ('{entity.Id}');", null, transaction);
+
+                await transaction.CommitAsync();
 
                 await connection.CloseAsync();
             }
@@ -56,7 +64,11 @@ namespace ClearDomain.Tests.StringPrimary
             {
                 await connection.OpenAsync();
 
-                var result = await connection.QueryFirstAsync<TestStringEntity>($"SELECT * FROM dbo.StringEntities WHERE Id='{id}';");
+                var transaction = connection.BeginTransaction();
+
+                var result = await connection.QueryFirstAsync<TestStringEntity>($"SELECT * FROM dbo.StringEntities WHERE Id='{id}';", null, transaction);
+
+                await transaction.CommitAsync();
 
                 await connection.CloseAsync();
 
