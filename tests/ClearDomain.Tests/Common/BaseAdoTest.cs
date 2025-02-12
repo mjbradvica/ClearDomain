@@ -32,7 +32,9 @@ namespace ClearDomain.Tests.Common
 
                     var transaction = connection.BeginTransaction();
 
-                    var command = new SqlCommand($"DROP TABLE IF EXISTS [dbo].[{pair.Key}];", connection, transaction);
+                    var sql = pair.Value.Contains("int") ? $"IF OBJECT_ID(N'dbo.{pair.Key}', N'U') IS NULL CREATE TABLE {pair.Key} (Id {pair.Value} IDENTITY(1,1) PRIMARY KEY);" : $"IF OBJECT_ID(N'dbo.{pair.Key}', N'U') IS NULL CREATE TABLE {pair.Key} (Id {pair.Value} PRIMARY KEY);";
+
+                    var command = new SqlCommand(sql, connection, transaction);
 
                     command.ExecuteNonQuery();
 
@@ -47,9 +49,7 @@ namespace ClearDomain.Tests.Common
 
                     var transaction = connection.BeginTransaction();
 
-                    var sql = pair.Value.Contains("int") ? $"CREATE TABLE {pair.Key} (Id {pair.Value} IDENTITY(1,1) PRIMARY KEY);" : $"CREATE TABLE {pair.Key} (Id {pair.Value} PRIMARY KEY);";
-
-                    var command = new SqlCommand(sql, connection, transaction);
+                    var command = new SqlCommand($"DELETE FROM [dbo].[{pair.Key}];", connection, transaction);
 
                     command.ExecuteNonQuery();
 

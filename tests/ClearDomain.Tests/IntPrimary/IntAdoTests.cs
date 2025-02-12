@@ -72,7 +72,7 @@ namespace ClearDomain.Tests.IntPrimary
             {
                 await connection.OpenAsync();
 
-                var entity = new TestIntEntity(1);
+                var entity = new TestIntEntity(1000);
 
                 var transaction = connection.BeginTransaction();
 
