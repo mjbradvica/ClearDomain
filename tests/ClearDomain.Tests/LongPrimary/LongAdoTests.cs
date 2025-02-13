@@ -41,7 +41,7 @@ namespace ClearDomain.Tests.LongPrimary
         [TestMethod]
         public async Task Entity_Dapper_CanBeRetrieved()
         {
-            const int id = 999;
+            const int id = 5512;
 
             await using (var connection = new SqlConnection(TestHelpers.ConnectionString()))
             {
@@ -80,7 +80,7 @@ namespace ClearDomain.Tests.LongPrimary
             {
                 await connection.OpenAsync();
 
-                var entity = new TestLongEntity(1);
+                var entity = new TestLongEntity(876);
 
                 var transaction = connection.BeginTransaction();
 
@@ -101,7 +101,7 @@ namespace ClearDomain.Tests.LongPrimary
         [TestMethod]
         public async Task Entity_ADO_CanBeRetrieved()
         {
-            const int id = 9999;
+            const int id = 1234;
 
             await using (var connection = new SqlConnection(TestHelpers.ConnectionString()))
             {

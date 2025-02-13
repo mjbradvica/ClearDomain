@@ -27,5 +27,14 @@ namespace ClearDomain.Tests.Common
         {
             return "mongodb://localhost:27017";
         }
+
+        /// <summary>
+        /// Returns a test guid.
+        /// </summary>
+        /// <returns>A test <see cref="Guid"/>.</returns>
+        public static Guid TestGuid()
+        {
+            return Guid.Parse("0048bfe4-1843-4cb3-b487-50c12d37c37f");
+        }
     }
 }
