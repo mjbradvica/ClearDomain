@@ -1,9 +1,7 @@
-﻿// <copyright file="ClearDomainIdentityUser.cs" company="Michael Bradvica LLC">
-// Copyright (c) Michael Bradvica LLC. All rights reserved.
+﻿// <copyright file="ClearDomainIdentityUser.cs" company="Simplex Software LLC">
+// Copyright (c) Simplex Software LLC. All rights reserved.
 // </copyright>
 
-using System;
-using System.Collections.Generic;
 using ClearDomain.Common;
 using Microsoft.AspNetCore.Identity;
 
@@ -37,7 +35,7 @@ namespace ClearDomain.Identity.Common
         }
 
         /// <inheritdoc />
-        public IEnumerable<IDomainEvent> DomainEvents => _domainEvents;
+        public IEnumerable<IDomainEvent> DomainEvents => _domainEvents.AsEnumerable();
 
         /// <summary>
         /// Determines equality for another entity.
@@ -87,7 +85,7 @@ namespace ClearDomain.Identity.Common
         /// Appends a domain event to the current list.
         /// </summary>
         /// <param name="domainEvent">A <see cref="IDomainEvent"/> to append.</param>
-        public virtual void AppendDomainEvent(IDomainEvent domainEvent)
+        public void AppendDomainEvent(IDomainEvent domainEvent)
         {
             _domainEvents.Add(domainEvent);
         }

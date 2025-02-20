@@ -1,5 +1,5 @@
-﻿// <copyright file="TestDbContext.cs" company="Michael Bradvica LLC">
-// Copyright (c) Michael Bradvica LLC. All rights reserved.
+﻿// <copyright file="TestDbContext.cs" company="Simplex Software LLC">
+// Copyright (c) Simplex Software LLC. All rights reserved.
 // </copyright>
 
 using ClearDomain.Tests.GuidPrimary;
@@ -18,10 +18,10 @@ namespace ClearDomain.Tests.Common
         /// <summary>
         /// Initializes a new instance of the <see cref="TestDbContext"/> class.
         /// </summary>
-        public TestDbContext()
+        /// <param name="options">A <see cref="DbContextOptions"/> class.</param>
+        public TestDbContext(DbContextOptions options)
+            : base(options)
         {
-            Database.EnsureCreated();
-
             GuidEntities = Set<TestGuidEntity>();
             IntEntities = Set<TestIntEntity>();
             LongEntities = Set<TestLongEntity>();
@@ -30,6 +30,8 @@ namespace ClearDomain.Tests.Common
             IntIdentityUsers = Set<TestIntIdentityUser>();
             LongIdentityUsers = Set<TestLongIdentityUser>();
             StringIdentityUsers = Set<TestStringIdentityUser>();
+
+            Database.EnsureCreated();
         }
 
         /// <summary>
@@ -73,14 +75,10 @@ namespace ClearDomain.Tests.Common
         public DbSet<TestStringIdentityUser> StringIdentityUsers { get; }
 
         /// <inheritdoc />
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer(TestHelpers.ConnectionString());
-        }
-
-        /// <inheritdoc />
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<TestIntEntity>()
                 .Property(entity => entity.Id)
                 .ValueGeneratedOnAdd();

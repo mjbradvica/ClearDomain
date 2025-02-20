@@ -1,8 +1,7 @@
-﻿// <copyright file="GuidIdentityUserTests.cs" company="Michael Bradvica LLC">
-// Copyright (c) Michael Bradvica LLC. All rights reserved.
+﻿// <copyright file="GuidIdentityUserTests.cs" company="Simplex Software LLC">
+// Copyright (c) Simplex Software LLC. All rights reserved.
 // </copyright>
 
-using System;
 using ClearDomain.GuidPrimary;
 using ClearDomain.Identity.Common;
 using ClearDomain.Identity.GuidPrimary;

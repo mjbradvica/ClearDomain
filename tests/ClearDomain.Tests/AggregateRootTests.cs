@@ -1,9 +1,7 @@
-﻿// <copyright file="AggregateRootTests.cs" company="Michael Bradvica LLC">
-// Copyright (c) Michael Bradvica LLC. All rights reserved.
+﻿// <copyright file="AggregateRootTests.cs" company="Simplex Software LLC">
+// Copyright (c) Simplex Software LLC. All rights reserved.
 // </copyright>
 
-using System;
-using System.Linq;
 using ClearDomain.Common;
 using ClearDomain.GuidPrimary;
 using Microsoft.VisualStudio.TestTools.UnitTesting;

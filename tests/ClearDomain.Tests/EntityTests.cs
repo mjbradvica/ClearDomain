@@ -1,8 +1,7 @@
-﻿// <copyright file="EntityTests.cs" company="Michael Bradvica LLC">
-// Copyright (c) Michael Bradvica LLC. All rights reserved.
+﻿// <copyright file="EntityTests.cs" company="Simplex Software LLC">
+// Copyright (c) Simplex Software LLC. All rights reserved.
 // </copyright>
 
-using System;
 using ClearDomain.Common;
 using ClearDomain.Tests.GuidPrimary;
 using ClearDomain.Tests.IntPrimary;

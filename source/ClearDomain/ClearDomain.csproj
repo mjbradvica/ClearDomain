@@ -1,19 +1,19 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net5.0;net6.0;net7.0;net8.0;net9.0</TargetFrameworks>
+    <TargetFrameworks>net8.0;net9.0</TargetFrameworks>
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
 	  <Title>ClearDomain</Title>
 	  <Authors>Michael Bradvica</Authors>
-	  <Company>Michael Bradvica LLC.</Company>
+	  <Company>Simplex Software LLC</Company>
 	  <Description>A set of domain base classes and interfaces for .NET.</Description>
-	  <Copyright>Copyright 2024. All rights reserved.</Copyright>
+	  <Copyright>Copyright (c) Simplex Software LLC 2025. All rights reserved.</Copyright>
 	  <PackageProjectUrl>https://github.com/mjbradvica/ClearDomain</PackageProjectUrl>
 	  <PackageReadmeFile>README.md</PackageReadmeFile>
 	  <RepositoryUrl>https://github.com/mjbradvica/ClearDomain</RepositoryUrl>
 	  <PackageTags>ddd, domain, DomainDrivenDesign</PackageTags>
 	  <PackageLicenseFile>LICENSE</PackageLicenseFile>
-	  <Version>0.9.4</Version>
+	  <Version>0.9.5</Version>
   </PropertyGroup>
 
   <ItemGroup>
