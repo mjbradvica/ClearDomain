@@ -221,8 +221,6 @@ public class ShoppingCart : AggregateRoot
 }
 ```
 
-The "AppendDomainEvent" method is virtual. You may override it to your liking.
-
 > Aggregate Roots are a more specialized kind of entity that serve as an entry point to a model in your application.
 
 ### Domain Events
