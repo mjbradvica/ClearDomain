@@ -22,7 +22,6 @@ ClearDomain gives you:
   - [Overview](#overview)
   - [Table of Contents](#table-of-contents)
   - [Samples](#samples)
-  - [Support](#support)
   - [Dependencies](#dependencies)
   - [Installation](#installation)
   - [Contents](#contents)
@@ -50,12 +49,6 @@ ClearDomain gives you:
 ## Samples
 
 If you would like code samples for ClearDomain, they may be found [here](https://github.com/mjbradvica/ClearDomain/tree/master/samples/ClearDomain.Samples).
-
-## Support
-
-ClearDomain supports any version of .NET that allows for C# 9.0 and above. This currently includes NET5, NET6, NET7, and NET8.
-
-> NetStandard 2.1 is not supported. This is due to a design decision to use the "init" keyword for properties.
 
 ## Dependencies
 
