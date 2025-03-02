@@ -34,7 +34,7 @@ namespace ClearDomain.Tests
         [TestMethod]
         public void GuidConstructor_EmptyId_ThrowsException()
         {
-            Assert.ThrowsException<NullReferenceException>(() => new TestGuidEntity(Guid.Empty));
+            Assert.ThrowsExactly<NullReferenceException>(() => _ = new TestGuidEntity(Guid.Empty));
         }
 
         /// <summary>
@@ -43,7 +43,7 @@ namespace ClearDomain.Tests
         [TestMethod]
         public void IntConstructor_EmptyId_ThrowsException()
         {
-            Assert.ThrowsException<NullReferenceException>(() => new TestIntEntity(0));
+            Assert.ThrowsExactly<NullReferenceException>(() => _ = new TestIntEntity(0));
         }
 
         /// <summary>
@@ -52,7 +52,7 @@ namespace ClearDomain.Tests
         [TestMethod]
         public void LongConstructor_EmptyId_ThrowsException()
         {
-            Assert.ThrowsException<NullReferenceException>(() => new TestLongEntity(0));
+            Assert.ThrowsExactly<NullReferenceException>(() => _ = new TestLongEntity(0));
         }
 
         /// <summary>
@@ -61,7 +61,7 @@ namespace ClearDomain.Tests
         [TestMethod]
         public void StringConstructor_EmptyId_ThrowsException()
         {
-            Assert.ThrowsException<NullReferenceException>(() => new TestStringEntity(string.Empty));
+            Assert.ThrowsExactly<NullReferenceException>(() => _ = new TestStringEntity(string.Empty));
         }
 
         /// <summary>
@@ -111,7 +111,7 @@ namespace ClearDomain.Tests
         {
             var first = new TestStringEntity
             {
-                Id = default!,
+                Id = null!,
             };
             var second = new TestStringEntity();
 
@@ -134,7 +134,7 @@ namespace ClearDomain.Tests
         /// Ensures the hash code is above the floor value.
         /// </summary>
         [TestMethod]
-        public void GetHaseCode_ReturnsMinimumValue()
+        public void GetHashCode_ReturnsMinimumValue()
         {
             var entity = new TestGuidEntity(Guid.NewGuid());
 

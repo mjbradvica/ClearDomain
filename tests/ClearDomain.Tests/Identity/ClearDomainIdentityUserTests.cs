@@ -48,9 +48,9 @@ namespace ClearDomain.Tests.Identity
 
             var other = new TestIdentityUser();
 
-            // TODO: Restore after base package update.
-            // var result = user.Equals(other);
-            // Assert.IsFalse(result);
+            var result = user.Equals(other);
+
+            Assert.IsFalse(result);
         }
 
         /// <summary>
@@ -71,9 +71,9 @@ namespace ClearDomain.Tests.Identity
                 Id = id,
             };
 
-            // TODO: Restore after base package update.
-            // var result = user.Equals(other);
-            // Assert.IsTrue(result);
+            var result = user.Equals(other);
+
+            Assert.IsTrue(result);
         }
 
         /// <summary>
@@ -115,16 +115,16 @@ namespace ClearDomain.Tests.Identity
         }
 
         /// <summary>
-        /// Ensures hashcode is above floor.
+        /// Ensures hash code is above floor.
         /// </summary>
         [TestMethod]
         public void GetHashCode_IsAboveMinimum()
         {
             var user = new TestIdentityUser();
 
-            var hashcode = user.GetHashCode();
+            var hash = user.GetHashCode();
 
-            Assert.IsTrue(hashcode > 0);
+            Assert.IsTrue(hash > 0);
         }
 
         /// <summary>

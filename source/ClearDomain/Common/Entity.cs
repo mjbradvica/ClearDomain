@@ -105,9 +105,9 @@ namespace ClearDomain.Common
         }
 
         /// <summary>
-        /// Returns a hashcode for the entity. This is required by the <see cref="IEquatable{T}"/> interface.
+        /// Returns a hash code for the entity. This is required by the <see cref="IEquatable{T}"/> interface.
         /// </summary>
-        /// <returns>A <see cref="int"/> hashcode for the entity.</returns>
+        /// <returns>A <see cref="int"/> hash code for the entity.</returns>
         public override int GetHashCode()
         {
             return GetType().GetHashCode();
