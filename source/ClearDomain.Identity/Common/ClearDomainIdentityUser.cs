@@ -10,39 +10,41 @@ namespace ClearDomain.Identity.Common
     /// <summary>
     /// Base class for an identity user with ClearDomain functionality.
     /// </summary>
-    /// <typeparam name="T">The type of the identifier.</typeparam>
-    public abstract class ClearDomainIdentityUser<T> : IdentityUser<T>, IAggregateRoot<T>, IEquatable<IEntity<T>>
-        where T : IEquatable<T>
+    /// <typeparam name="TId">The type of the identifier.</typeparam>
+    /// <typeparam name="TDomainEvent">The type of the domain event.</typeparam>
+    public abstract class ClearDomainIdentityUser<TId, TDomainEvent> : IdentityUser<TId>, IAggregateRoot<TId, TDomainEvent>, IEquatable<IEntity<TId>>
+        where TId : IEquatable<TId>
+        where TDomainEvent : class
     {
-        private readonly List<IDomainEvent> _domainEvents;
+        private readonly List<TDomainEvent> _domainEvents;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ClearDomainIdentityUser{T}"/> class.
+        /// Initializes a new instance of the <see cref="ClearDomainIdentityUser{TId, TDomainEvent}"/> class.
         /// </summary>
         protected ClearDomainIdentityUser()
         {
-            _domainEvents = new List<IDomainEvent>();
+            _domainEvents = new List<TDomainEvent>();
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ClearDomainIdentityUser{T}"/> class.
+        /// Initializes a new instance of the <see cref="ClearDomainIdentityUser{TId, TDomainEvent}"/> class.
         /// </summary>
         /// <param name="userName">The username for the identity user.</param>
         protected ClearDomainIdentityUser(string userName)
             : base(userName)
         {
-            _domainEvents = new List<IDomainEvent>();
+            _domainEvents = new List<TDomainEvent>();
         }
 
         /// <inheritdoc />
-        public IEnumerable<IDomainEvent> DomainEvents => _domainEvents.AsEnumerable();
+        public IEnumerable<TDomainEvent> DomainEvents => _domainEvents.AsEnumerable();
 
         /// <summary>
         /// Determines equality for another entity.
         /// </summary>
         /// <param name="other">The other entity to compare.</param>
         /// <returns>A <see cref="bool"/> indicating if the objects are equal.</returns>
-        public bool Equals(IEntity<T>? other)
+        public bool Equals(IEntity<TId>? other)
         {
             if (other == null)
             {
@@ -64,7 +66,7 @@ namespace ClearDomain.Identity.Common
         /// <returns>A <see cref="bool"/> indicating if the objects are equal.</returns>
         public override bool Equals(object? obj)
         {
-            if (obj is IEntity<T> user)
+            if (obj is IEntity<TId> user)
             {
                 return Equals(user);
             }
@@ -73,9 +75,9 @@ namespace ClearDomain.Identity.Common
         }
 
         /// <summary>
-        /// Returns a hashcode for the entity. This is required by the <see cref="IEquatable{T}"/> interface.
+        /// Returns a hash code for the entity. This is required by the <see cref="IEquatable{T}"/> interface.
         /// </summary>
-        /// <returns>A <see cref="int"/> hashcode for the entity.</returns>
+        /// <returns>A <see cref="int"/> hash code for the entity.</returns>
         public override int GetHashCode()
         {
             return GetType().GetHashCode();
@@ -84,8 +86,8 @@ namespace ClearDomain.Identity.Common
         /// <summary>
         /// Appends a domain event to the current list.
         /// </summary>
-        /// <param name="domainEvent">A <see cref="IDomainEvent"/> to append.</param>
-        public void AppendDomainEvent(IDomainEvent domainEvent)
+        /// <param name="domainEvent">A <typeparamref name="TDomainEvent"/> to append.</param>
+        public void AppendDomainEvent(TDomainEvent domainEvent)
         {
             _domainEvents.Add(domainEvent);
         }

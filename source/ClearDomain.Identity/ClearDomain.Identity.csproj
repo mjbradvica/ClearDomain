@@ -32,9 +32,9 @@
       <Version>9.0.2</Version>
     </PackageReference>
   </ItemGroup>
-
+  
   <ItemGroup>
-    <PackageReference Include="ClearDomain" Version="0.9.5" />
+    <ProjectReference Include="..\ClearDomain\ClearDomain.csproj" />
   </ItemGroup>
 
 </Project>
