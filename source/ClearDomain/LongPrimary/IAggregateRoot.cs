@@ -9,7 +9,7 @@ namespace ClearDomain.LongPrimary
     /// <summary>
     /// Interface constraint for a <see cref="long"/> AggregateRoot.
     /// </summary>
-    public interface IAggregateRoot : IAggregateRoot<long>, IEntity
+    public interface IAggregateRoot : IAggregateRoot<long, IDomainEvent>, IEntity
     {
     }
 }

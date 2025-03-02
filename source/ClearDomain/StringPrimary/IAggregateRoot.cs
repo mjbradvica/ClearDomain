@@ -9,7 +9,7 @@ namespace ClearDomain.StringPrimary
     /// <summary>
     /// Interface constraint for a <see cref="string"/> AggregateRoot.
     /// </summary>
-    public interface IAggregateRoot : IAggregateRoot<string>, IEntity
+    public interface IAggregateRoot : IAggregateRoot<string, IDomainEvent>, IEntity
     {
     }
 }

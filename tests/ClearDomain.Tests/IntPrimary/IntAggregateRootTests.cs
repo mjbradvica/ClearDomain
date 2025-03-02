@@ -44,14 +44,14 @@ namespace ClearDomain.Tests.IntPrimary
         {
             var root = new TestAggregateRoot(1);
 
-            Assert.IsInstanceOfType<AggregateRoot<int>>(root);
+            Assert.IsInstanceOfType<AggregateRoot<int, IDomainEvent>>(root);
             Assert.IsInstanceOfType<IAggregateRoot>(root);
         }
 
         /// <summary>
         /// Test aggregate root.
         /// </summary>
-        internal class TestAggregateRoot : AggregateRoot
+        private class TestAggregateRoot : AggregateRoot
         {
             /// <summary>
             /// Initializes a new instance of the <see cref="TestAggregateRoot"/> class.

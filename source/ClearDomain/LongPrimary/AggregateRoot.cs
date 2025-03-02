@@ -9,7 +9,7 @@ namespace ClearDomain.LongPrimary
     /// <summary>
     /// Base class for all <see cref="long"/> aggregate roots.
     /// </summary>
-    public abstract class AggregateRoot : AggregateRoot<long>, IAggregateRoot
+    public abstract class AggregateRoot : AggregateRoot<long, IDomainEvent>, IAggregateRoot
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="AggregateRoot"/> class.

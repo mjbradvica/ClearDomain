@@ -44,7 +44,7 @@ namespace ClearDomain.Tests.StringPrimary
         {
             var root = new TestAggregateRoot("2");
 
-            Assert.IsInstanceOfType<AggregateRoot<string>>(root);
+            Assert.IsInstanceOfType<AggregateRoot<string, IDomainEvent>>(root);
             Assert.IsInstanceOfType<IAggregateRoot>(root);
         }
 

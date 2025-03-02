@@ -9,7 +9,7 @@ namespace ClearDomain.StringPrimary
     /// <summary>
     /// Base class for all <see cref="string"/> aggregate roots.
     /// </summary>
-    public abstract class AggregateRoot : AggregateRoot<string>, IAggregateRoot
+    public abstract class AggregateRoot : AggregateRoot<string, IDomainEvent>, IAggregateRoot
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="AggregateRoot"/> class.

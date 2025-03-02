@@ -7,12 +7,14 @@ namespace ClearDomain.Common
     /// <summary>
     /// Base interface for aggregate roots.
     /// </summary>
-    /// <typeparam name="T">The type of the entity identifier.</typeparam>
-    public interface IAggregateRoot<out T> : IEntity<T>
+    /// <typeparam name="TId">The type of the entity identifier.</typeparam>
+    /// <typeparam name="TEvent">The type of the domain event.</typeparam>
+    public interface IAggregateRoot<out TId, out TEvent> : IEntity<TId>
+        where TEvent : class
     {
         /// <summary>
         /// Gets all domain events for an aggregate root.
         /// </summary>
-        public IEnumerable<IDomainEvent> DomainEvents { get; }
+        public IEnumerable<TEvent> DomainEvents { get; }
     }
 }

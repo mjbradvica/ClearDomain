@@ -40,7 +40,7 @@ namespace ClearDomain.Samples
             var second = new GuidCustomer(id, "someUserName");
 
             // Customers' have entity equality
-            Console.WriteLine(first.Equals(second));
+            // Console.WriteLine(first.Equals(second));
 
             // Customers can add domain events.
             first.AppendDomainEvent(new CustomerCreated());

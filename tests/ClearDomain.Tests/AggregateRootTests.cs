@@ -58,7 +58,7 @@ namespace ClearDomain.Tests
             var root = new TestAggregateRoot();
 
             Assert.IsInstanceOfType<Entity<Guid>>(root);
-            Assert.IsInstanceOfType<IAggregateRoot<Guid>>(root);
+            Assert.IsInstanceOfType<IAggregateRoot<Guid, IDomainEvent>>(root);
 
             IEntity<Guid> secondRoot = new TestAggregateRoot();
 
