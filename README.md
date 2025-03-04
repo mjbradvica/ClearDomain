@@ -13,7 +13,7 @@ ClearDomain gives you:
 - :seedling: Compact and straightforward API (3 classes and 3 interfaces)
 - :muscle: Flexible to your needs
 - :house: Reliable, consistent behavior
-- :minidisc: Works with ADO.NET, Dapper, EF, and MongoDB
+- :minidisc: Works with ADO.NET, Dapper, EF, Redis, and MongoDB
 - :detective: ASP.NET Identity support
 
 ## Table of Contents
@@ -344,24 +344,36 @@ You may do the same for your AggregateRoots.
 
 > The Microsoft base IdentityUser class has full public getters and setters. Utilizing constructors for your IdentityUser classes may not be worth it.
 
-### Domain Events with MediatR
+### Domain Events with MediatR or NServiceBus
 
-If you are using [MediatR](https://github.com/jbogard/MediatR) to publish events, it may be easier to create an interface that aggregates the interfaces necessary.
+If you are using [MediatR](https://github.com/jbogard/MediatR) to publish events, you may create a new IAggregateRoot interface and AggregateRoot base class with the type of the DomainEvent you wish to use.
+
+The example below shows you how easily you can use the INotification interface for MediatR instead of the default interface as your domain event.
 
 ```csharp
-public interface IEventNotification : INotification, IDomainEvent
+public interface IAggregateRoot : IAggregateRoot<Guid, INotification>
 {
 }
 ```
 
-Your new interface will now be used.
+You will need to create a new base AggregateRoot class that like so. You will inherit from the Common AggregateRoot<TId, TEvent> and the interface you just created.
 
 ```csharp
-public class CartUpdated : IEventNotification
+public abstract class AggregateRoot : AggregateRoot<Guid, INotification>, IAggregateRoot
 {
-    // properties in here
+    protected AggregateRoot()
+        : base(Guid.NewGuid())
+    {
+    }
+
+    protected AggregateRoot(Guid id)
+        : base(id)
+    {
+    }
 }
 ```
+
+> You can use this same pattern for any other interface constraint and the type of the Id that you choose.
 
 ### Using a Different Identifier Type
 
