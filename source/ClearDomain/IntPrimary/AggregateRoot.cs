@@ -9,7 +9,7 @@ namespace ClearDomain.IntPrimary
     /// <summary>
     /// Base class for all <see cref="int"/> aggregate roots.
     /// </summary>
-    public abstract class AggregateRoot : AggregateRoot<int>, IAggregateRoot
+    public abstract class AggregateRoot : AggregateRoot<int, IDomainEvent>, IAggregateRoot
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="AggregateRoot"/> class.

@@ -115,16 +115,16 @@ namespace ClearDomain.Tests.Identity
         }
 
         /// <summary>
-        /// Ensures hashcode is above floor.
+        /// Ensures hash code is above floor.
         /// </summary>
         [TestMethod]
         public void GetHashCode_IsAboveMinimum()
         {
             var user = new TestIdentityUser();
 
-            var hashcode = user.GetHashCode();
+            var hash = user.GetHashCode();
 
-            Assert.IsTrue(hashcode > 0);
+            Assert.IsTrue(hash > 0);
         }
 
         /// <summary>
@@ -149,7 +149,7 @@ namespace ClearDomain.Tests.Identity
             var user = new TestIdentityUser();
 
             Assert.IsInstanceOfType<IdentityUser<string>>(user);
-            Assert.IsInstanceOfType<IAggregateRoot<string>>(user);
+            Assert.IsInstanceOfType<IAggregateRoot<string, IDomainEvent>>(user);
             Assert.IsInstanceOfType<IEquatable<IEntity<string>>>(user);
         }
     }

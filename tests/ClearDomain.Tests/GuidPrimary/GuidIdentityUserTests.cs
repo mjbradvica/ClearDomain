@@ -2,6 +2,7 @@
 // Copyright (c) Simplex Software LLC. All rights reserved.
 // </copyright>
 
+using ClearDomain.Common;
 using ClearDomain.GuidPrimary;
 using ClearDomain.Identity.Common;
 using ClearDomain.Identity.GuidPrimary;
@@ -45,7 +46,7 @@ namespace ClearDomain.Tests.GuidPrimary
         {
             var user = new TestGuidIdentityUser();
 
-            Assert.IsInstanceOfType<ClearDomainIdentityUser<Guid>>(user);
+            Assert.IsInstanceOfType<ClearDomainIdentityUser<Guid, IDomainEvent>>(user);
             Assert.IsInstanceOfType<IAggregateRoot>(user);
         }
     }

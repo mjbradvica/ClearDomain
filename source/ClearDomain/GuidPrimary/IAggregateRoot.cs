@@ -9,7 +9,7 @@ namespace ClearDomain.GuidPrimary
     /// <summary>
     /// Interface constraint for a <see cref="Guid"/> AggregateRoot.
     /// </summary>
-    public interface IAggregateRoot : IAggregateRoot<Guid>, IEntity
+    public interface IAggregateRoot : IAggregateRoot<Guid, IDomainEvent>, IEntity
     {
     }
 }

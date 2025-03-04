@@ -3,13 +3,12 @@
 // </copyright>
 
 using ClearDomain.Common;
+using MediatR;
 
-namespace ClearDomain.GuidPrimary
+namespace ClearDomain.Samples.MediatorGuid
 {
-    /// <summary>
-    /// Base class for all <see cref="Guid"/> aggregate roots.
-    /// </summary>
-    public abstract class AggregateRoot : AggregateRoot<Guid, IDomainEvent>, IAggregateRoot
+    /// <inheritdoc cref="IAggregateRoot" />
+    public abstract class AggregateRoot : AggregateRoot<Guid, INotification>, IAggregateRoot
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="AggregateRoot"/> class.

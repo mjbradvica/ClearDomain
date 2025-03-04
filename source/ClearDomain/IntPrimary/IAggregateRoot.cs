@@ -9,7 +9,7 @@ namespace ClearDomain.IntPrimary
     /// <summary>
     /// Interface constraint for a <see cref="int"/> AggregateRoot.
     /// </summary>
-    public interface IAggregateRoot : IAggregateRoot<int>, IEntity
+    public interface IAggregateRoot : IAggregateRoot<int, IDomainEvent>, IEntity
     {
     }
 }

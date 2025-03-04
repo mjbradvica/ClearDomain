@@ -2,6 +2,7 @@
 // Copyright (c) Simplex Software LLC. All rights reserved.
 // </copyright>
 
+using ClearDomain.Common;
 using ClearDomain.Identity.Common;
 using ClearDomain.Identity.LongPrimary;
 using ClearDomain.LongPrimary;
@@ -45,7 +46,7 @@ namespace ClearDomain.Tests.LongPrimary
         {
             var user = new TestLongIdentityUser();
 
-            Assert.IsInstanceOfType<ClearDomainIdentityUser<long>>(user);
+            Assert.IsInstanceOfType<ClearDomainIdentityUser<long, IDomainEvent>>(user);
             Assert.IsInstanceOfType<IAggregateRoot>(user);
         }
     }

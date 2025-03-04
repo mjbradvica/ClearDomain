@@ -2,14 +2,14 @@
 // Copyright (c) Simplex Software LLC. All rights reserved.
 // </copyright>
 
-using ClearDomain.Identity.Common;
+using ClearDomain.Identity.StringPrimary;
 
 namespace ClearDomain.Tests.Identity
 {
     /// <summary>
     /// Test identity user.
     /// </summary>
-    internal class TestIdentityUser : ClearDomainIdentityUser<string>
+    internal class TestIdentityUser : ClearDomainIdentityUser
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="TestIdentityUser"/> class.

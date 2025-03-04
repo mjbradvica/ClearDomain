@@ -2,6 +2,7 @@
 // Copyright (c) Simplex Software LLC. All rights reserved.
 // </copyright>
 
+using ClearDomain.Common;
 using ClearDomain.Identity.Common;
 using ClearDomain.Identity.StringPrimary;
 using ClearDomain.StringPrimary;
@@ -45,7 +46,7 @@ namespace ClearDomain.Tests.StringPrimary
         {
             var user = new TestStringIdentityUser();
 
-            Assert.IsInstanceOfType<ClearDomainIdentityUser<string>>(user);
+            Assert.IsInstanceOfType<ClearDomainIdentityUser<string, IDomainEvent>>(user);
             Assert.IsInstanceOfType<IAggregateRoot>(user);
         }
     }
