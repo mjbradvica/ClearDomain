@@ -35,7 +35,7 @@ ClearDomain gives you:
     - [Entity Constraints](#entity-constraints)
     - [AggregateRoot Constraints](#aggregateroot-constraints)
     - [Entity \& AggregateRoot Encapsulation](#entity--aggregateroot-encapsulation)
-    - [Domain Events with MediatR](#domain-events-with-mediatr)
+    - [Domain Events with MediatR or NServiceBus](#domain-events-with-mediatr-or-nservicebus)
     - [Using a Different Identifier Type](#using-a-different-identifier-type)
   - [Identity User Creation](#identity-user-creation)
   - [Identity User Types](#identity-user-types)
