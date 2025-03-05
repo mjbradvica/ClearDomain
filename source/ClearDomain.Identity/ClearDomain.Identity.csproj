@@ -13,7 +13,7 @@
     <RepositoryUrl>https://github.com/mjbradvica/ClearDomain</RepositoryUrl>
     <PackageTags>ddd, domain, DomainDrivenDesign</PackageTags>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
-    <Version>0.9.5</Version>
+    <Version>0.9.6</Version>
   </PropertyGroup>
 
   <ItemGroup>
@@ -28,13 +28,10 @@
   </ItemGroup>
   
   <ItemGroup>
+    <PackageReference Include="ClearDomain" Version="0.9.6" />
     <PackageReference Include="Microsoft.Extensions.Identity.Stores">
       <Version>9.0.2</Version>
     </PackageReference>
-  </ItemGroup>
-  
-  <ItemGroup>
-    <ProjectReference Include="..\ClearDomain\ClearDomain.csproj" />
   </ItemGroup>
 
 </Project>
