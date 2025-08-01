@@ -30,7 +30,7 @@
   <ItemGroup>
     <PackageReference Include="ClearDomain" Version="0.9.6" />
     <PackageReference Include="Microsoft.Extensions.Identity.Stores">
-      <Version>9.0.2</Version>
+      <Version>9.0.7</Version>
     </PackageReference>
   </ItemGroup>
 
