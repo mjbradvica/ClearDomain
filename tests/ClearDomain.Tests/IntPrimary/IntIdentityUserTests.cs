@@ -2,11 +2,11 @@
 // Copyright (c) Simplex Software LLC. All rights reserved.
 // </copyright>
 
-using ClearDomain.Common;
 using ClearDomain.Identity.Common;
 using ClearDomain.Identity.IntPrimary;
 using ClearDomain.IntPrimary;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NMediation.Abstractions;
 
 namespace ClearDomain.Tests.IntPrimary
 {
@@ -20,7 +20,7 @@ namespace ClearDomain.Tests.IntPrimary
         /// Class has default constructor.
         /// </summary>
         [TestMethod]
-        public void Class_HasDefaultConstructor()
+        public void ClassHasDefaultConstructor()
         {
             var user = new TestIntIdentityUser();
 
@@ -31,7 +31,7 @@ namespace ClearDomain.Tests.IntPrimary
         /// Class has username constructor.
         /// </summary>
         [TestMethod]
-        public void Class_HasUsernameConstructor()
+        public void ClassHasUsernameConstructor()
         {
             var user = new TestIntIdentityUser("user");
 
@@ -42,11 +42,11 @@ namespace ClearDomain.Tests.IntPrimary
         /// Class has correct types.
         /// </summary>
         [TestMethod]
-        public void Class_HasCorrectTypes()
+        public void ClassHasCorrectTypes()
         {
             var user = new TestIntIdentityUser();
 
-            Assert.IsInstanceOfType<ClearDomainIdentityUser<int, IDomainEvent>>(user);
+            Assert.IsInstanceOfType<ClearDomainIdentityUser<int, IOccurrence>>(user);
             Assert.IsInstanceOfType<IAggregateRoot>(user);
         }
     }

@@ -3,13 +3,14 @@
 // </copyright>
 
 using ClearDomain.Common;
+using NMediation.Abstractions;
 
 namespace ClearDomain.GuidPrimary
 {
     /// <summary>
     /// Base class for all <see cref="Guid"/> aggregate roots.
     /// </summary>
-    public abstract class AggregateRoot : AggregateRoot<Guid, IDomainEvent>, IAggregateRoot
+    public abstract class AggregateRoot : AggregateRoot<Guid, IOccurrence>, IAggregateRoot
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="AggregateRoot"/> class.

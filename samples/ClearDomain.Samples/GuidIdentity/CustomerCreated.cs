@@ -2,14 +2,14 @@
 // Copyright (c) Simplex Software LLC. All rights reserved.
 // </copyright>
 
-using ClearDomain.Common;
+using NMediation.Abstractions;
 
 namespace ClearDomain.Samples.GuidIdentity
 {
     /// <summary>
     /// Sample domain event.
     /// </summary>
-    internal class CustomerCreated : IDomainEvent
+    internal sealed class CustomerCreated : IOccurrence
     {
     }
 }

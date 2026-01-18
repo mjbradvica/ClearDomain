@@ -4,9 +4,11 @@
         <EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
         <ImplicitUsings>enable</ImplicitUsings>
         <AnalysisLevel>latest</AnalysisLevel>
+        <AnalysisMode>Recommended</AnalysisMode>
         <GenerateDocumentationFile>True</GenerateDocumentationFile>
         <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
         <Nullable>enable</Nullable>
+        <LangVersion>latest</LangVersion>
         <CheckEolTargetFramework>true</CheckEolTargetFramework>
     </PropertyGroup>
     <ItemGroup>

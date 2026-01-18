@@ -1,0 +1,9 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path=".editorconfig" />
+  </Folder>
+  <Project Path="samples/ClearDomain.Samples/ClearDomain.Samples.csproj" />
+  <Project Path="source/ClearDomain.Identity/ClearDomain.Identity.csproj" />
+  <Project Path="source/ClearDomain/ClearDomain.csproj" />
+  <Project Path="tests/ClearDomain.Tests/ClearDomain.Tests.csproj" />
+</Solution>

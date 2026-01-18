@@ -5,6 +5,7 @@
 using ClearDomain.Common;
 using ClearDomain.StringPrimary;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NMediation.Abstractions;
 
 namespace ClearDomain.Tests.StringPrimary
 {
@@ -18,7 +19,7 @@ namespace ClearDomain.Tests.StringPrimary
         /// Ensure that events are instantiated on initialization.
         /// </summary>
         [TestMethod]
-        public void DefaultConstructor_InstantiatesObject()
+        public void DefaultConstructorInstantiatesObject()
         {
             var root = new TestAggregateRoot();
 
@@ -29,7 +30,7 @@ namespace ClearDomain.Tests.StringPrimary
         /// Ensure that events are instantiated on initialization.
         /// </summary>
         [TestMethod]
-        public void NonDefaultConstructor_InstantiatesObject()
+        public void NonDefaultConstructorInstantiatesObject()
         {
             var root = new TestAggregateRoot("4");
 
@@ -40,11 +41,11 @@ namespace ClearDomain.Tests.StringPrimary
         /// Ensures the class has the correct types.
         /// </summary>
         [TestMethod]
-        public void AggregateRoot_HasCorrectTypes()
+        public void AggregateRootHasCorrectTypes()
         {
             var root = new TestAggregateRoot("2");
 
-            Assert.IsInstanceOfType<AggregateRoot<string, IDomainEvent>>(root);
+            Assert.IsInstanceOfType<AggregateRoot<string, IOccurrence>>(root);
             Assert.IsInstanceOfType<IAggregateRoot>(root);
         }
 
@@ -52,7 +53,7 @@ namespace ClearDomain.Tests.StringPrimary
         /// Default constructor instantiates identifier.
         /// </summary>
         [TestMethod]
-        public void DefaultConstructor_InstantiatesIdentifier()
+        public void DefaultConstructorInstantiatesIdentifier()
         {
             var aggregateRoot = new TestAggregateRoot();
 
@@ -62,7 +63,7 @@ namespace ClearDomain.Tests.StringPrimary
         /// <summary>
         /// Test aggregate root.
         /// </summary>
-        internal class TestAggregateRoot : AggregateRoot
+        internal sealed class TestAggregateRoot : AggregateRoot
         {
             /// <summary>
             /// Initializes a new instance of the <see cref="TestAggregateRoot"/> class.

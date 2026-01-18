@@ -5,6 +5,7 @@
 using ClearDomain.Common;
 using ClearDomain.GuidPrimary;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NMediation.Abstractions;
 
 namespace ClearDomain.Tests
 {
@@ -18,7 +19,7 @@ namespace ClearDomain.Tests
         /// Ensure that events are instantiated on initialization.
         /// </summary>
         [TestMethod]
-        public void DefaultConstructor_InstantiatesEvents()
+        public void DefaultConstructorInstantiatesEvents()
         {
             var root = new TestAggregateRoot();
 
@@ -29,7 +30,7 @@ namespace ClearDomain.Tests
         /// Ensure that events are instantiated on initialization.
         /// </summary>
         [TestMethod]
-        public void NonDefaultConstructor_InstantiatesEvents()
+        public void NonDefaultConstructorInstantiatesEvents()
         {
             var root = new TestAggregateRoot(Guid.NewGuid());
 
@@ -40,7 +41,7 @@ namespace ClearDomain.Tests
         /// Ensures domain events are appended to the list.
         /// </summary>
         [TestMethod]
-        public void AddNotification_AppendsToEvents()
+        public void AddNotificationAppendsToEvents()
         {
             var root = new TestAggregateRoot();
 
@@ -53,12 +54,12 @@ namespace ClearDomain.Tests
         /// Ensures an aggregate root has the correct types.
         /// </summary>
         [TestMethod]
-        public void AggregateRoot_HasTheCorrectTypes()
+        public void AggregateRootHasTheCorrectTypes()
         {
             var root = new TestAggregateRoot();
 
             Assert.IsInstanceOfType<Entity<Guid>>(root);
-            Assert.IsInstanceOfType<IAggregateRoot<Guid, IDomainEvent>>(root);
+            Assert.IsInstanceOfType<IAggregateRoot<Guid, IOccurrence>>(root);
 
             IEntity<Guid> secondRoot = new TestAggregateRoot();
 
@@ -68,14 +69,14 @@ namespace ClearDomain.Tests
         /// <summary>
         /// Test domain event.
         /// </summary>
-        public class TestDomainEvent : IDomainEvent
+        public class TestDomainEvent : IOccurrence
         {
         }
 
         /// <summary>
         /// Test aggregate root.
         /// </summary>
-        internal class TestAggregateRoot : AggregateRoot
+        internal sealed class TestAggregateRoot : AggregateRoot
         {
             /// <summary>
             /// Initializes a new instance of the <see cref="TestAggregateRoot"/> class.

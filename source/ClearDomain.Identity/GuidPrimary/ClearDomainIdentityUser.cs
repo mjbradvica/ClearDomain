@@ -2,16 +2,16 @@
 // Copyright (c) Simplex Software LLC. All rights reserved.
 // </copyright>
 
-using ClearDomain.Common;
 using ClearDomain.GuidPrimary;
 using ClearDomain.Identity.Common;
+using NMediation.Abstractions;
 
 namespace ClearDomain.Identity.GuidPrimary
 {
     /// <summary>
     /// Base class for a <see cref="Guid"/> identity user with ClearDomain functionality.
     /// </summary>
-    public abstract class ClearDomainIdentityUser : ClearDomainIdentityUser<Guid, IDomainEvent>, IAggregateRoot
+    public abstract class ClearDomainIdentityUser : ClearDomainIdentityUser<Guid, IOccurrence>, IAggregateRoot
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ClearDomainIdentityUser"/> class.

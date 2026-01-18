@@ -1,22 +1,27 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net8.0;net9.0</TargetFrameworks>
+    <TargetFrameworks>net8.0;net9.0;net10.0</TargetFrameworks>
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
 	  <Title>ClearDomain</Title>
 	  <Authors>Michael Bradvica</Authors>
 	  <Company>Simplex Software LLC</Company>
 	  <Description>A set of domain base classes and interfaces for .NET.</Description>
-	  <Copyright>Copyright (c) Simplex Software LLC 2025. All rights reserved.</Copyright>
+	  <Copyright>Copyright (c) Simplex Software LLC 2026. All rights reserved.</Copyright>
 	  <PackageProjectUrl>https://github.com/mjbradvica/ClearDomain</PackageProjectUrl>
 	  <PackageReadmeFile>README.md</PackageReadmeFile>
 	  <RepositoryUrl>https://github.com/mjbradvica/ClearDomain</RepositoryUrl>
-	  <PackageTags>ddd, domain, DomainDrivenDesign</PackageTags>
+	  <PackageTags>ddd, domain, domain-driven-design</PackageTags>
 	  <PackageLicenseFile>LICENSE</PackageLicenseFile>
-	  <Version>0.9.6</Version>
+    <PackageIcon>logo.png</PackageIcon>
+	  <Version>0.9.7</Version>
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="..\..\images\logo.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
     <None Include="..\..\LICENSE">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
@@ -25,6 +30,10 @@
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NMediation.Abstractions" Version="0.9.0" />
   </ItemGroup>
 
 </Project>

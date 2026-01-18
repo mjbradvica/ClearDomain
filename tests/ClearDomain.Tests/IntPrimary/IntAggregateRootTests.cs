@@ -5,6 +5,7 @@
 using ClearDomain.Common;
 using ClearDomain.IntPrimary;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NMediation.Abstractions;
 
 namespace ClearDomain.Tests.IntPrimary
 {
@@ -18,7 +19,7 @@ namespace ClearDomain.Tests.IntPrimary
         /// Ensure that events are instantiated on initialization.
         /// </summary>
         [TestMethod]
-        public void DefaultConstructor_InstantiatesObject()
+        public void DefaultConstructorInstantiatesObject()
         {
             var root = new TestAggregateRoot();
 
@@ -29,7 +30,7 @@ namespace ClearDomain.Tests.IntPrimary
         /// Ensure that events are instantiated on initialization.
         /// </summary>
         [TestMethod]
-        public void NonDefaultConstructor_InstantiatesObject()
+        public void NonDefaultConstructorInstantiatesObject()
         {
             var root = new TestAggregateRoot(1);
 
@@ -40,18 +41,18 @@ namespace ClearDomain.Tests.IntPrimary
         /// Ensures the class has the correct types.
         /// </summary>
         [TestMethod]
-        public void AggregateRoot_HasCorrectTypes()
+        public void AggregateRootHasCorrectTypes()
         {
             var root = new TestAggregateRoot(1);
 
-            Assert.IsInstanceOfType<AggregateRoot<int, IDomainEvent>>(root);
+            Assert.IsInstanceOfType<AggregateRoot<int, IOccurrence>>(root);
             Assert.IsInstanceOfType<IAggregateRoot>(root);
         }
 
         /// <summary>
         /// Test aggregate root.
         /// </summary>
-        private class TestAggregateRoot : AggregateRoot
+        private sealed class TestAggregateRoot : AggregateRoot
         {
             /// <summary>
             /// Initializes a new instance of the <see cref="TestAggregateRoot"/> class.

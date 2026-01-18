@@ -17,7 +17,7 @@ namespace ClearDomain.Tests
         /// Ensures non property equality.
         /// </summary>
         [TestMethod]
-        public void EqualsOperator_ComparesObjects()
+        public void EqualsOperatorComparesObjects()
         {
             var first = new TestValueObject();
             var second = new TestValueObject();
@@ -29,7 +29,7 @@ namespace ClearDomain.Tests
         /// Ensures property equality.
         /// </summary>
         [TestMethod]
-        public void NonEqualsOperators_ComparesObjects()
+        public void NonEqualsOperatorsComparesObjects()
         {
             var first = new TestValueObject();
             first.SetId(10);
@@ -43,7 +43,7 @@ namespace ClearDomain.Tests
         /// Ensures property equality.
         /// </summary>
         [TestMethod]
-        public void Equals_ValueObject_EqualValues_ReturnsFalse()
+        public void EqualsValueObjectEqualValuesReturnsFalse()
         {
             var first = new TestValueObject();
             var second = new TestValueObject();
@@ -57,7 +57,7 @@ namespace ClearDomain.Tests
         /// Ensures correct response on null comparisons.
         /// </summary>
         [TestMethod]
-        public void Equals_ValueObject_NullValue_ReturnsFalse()
+        public void EqualsValueObjectNullValueReturnsFalse()
         {
             var first = new TestValueObject();
             first.SetId(null);
@@ -71,7 +71,7 @@ namespace ClearDomain.Tests
         /// Ensures correct response on non equal comparisons.
         /// </summary>
         [TestMethod]
-        public void Equals_ValueObject_NonEqualValue_ReturnsFalse()
+        public void EqualsValueObjectNonEqualValueReturnsFalse()
         {
             var first = new TestValueObject();
             first.SetId(10);
@@ -85,7 +85,7 @@ namespace ClearDomain.Tests
         /// Ensures correct response on object equality.
         /// </summary>
         [TestMethod]
-        public void Equals_ObjectValueObject_ReturnsTrue()
+        public void EqualsObjectValueObjectReturnsTrue()
         {
             var first = new TestValueObject();
             object second = new TestValueObject();
@@ -97,7 +97,7 @@ namespace ClearDomain.Tests
         /// Ensure correct response on object equality.
         /// </summary>
         [TestMethod]
-        public void Equals_NonObjectValueObject_ReturnsTrue()
+        public void EqualsNonObjectValueObjectReturnsTrue()
         {
             var first = new TestValueObject();
             object second = "nonValueObject";
@@ -109,17 +109,17 @@ namespace ClearDomain.Tests
         /// Ensures the hashcode returns the floor minimum.
         /// </summary>
         [TestMethod]
-        public void GetHashCode_ReturnsMinimumValue()
+        public void GetHashCodeReturnsMinimumValue()
         {
             var valueObject = new TestValueObject();
 
-            Assert.IsTrue(valueObject.GetHashCode() > 1);
+            Assert.IsGreaterThan(1, valueObject.GetHashCode());
         }
 
         /// <summary>
         /// Test value object.
         /// </summary>
-        internal class TestValueObject : ValueObject
+        internal sealed class TestValueObject : ValueObject
         {
             private int? _id;
 

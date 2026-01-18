@@ -218,10 +218,10 @@ public class ShoppingCart : AggregateRoot
 
 ### Domain Events
 
-Domain Events in ClearDomain need to be inherited from the [IDomainEvent](https://github.com/mjbradvica/ClearDomain/blob/master/source/ClearDomain/Common/IDomainEvent.cs) interface. This is an empty constraint used to enforce that all domain events are classes.
+Domain Events in ClearDomain need to be inherited from the [IOccurrence](https://github.com/mjbradvica/ClearDomain/blob/master/source/ClearDomain/Common/IOccurrence.cs) interface. This is an empty constraint used to enforce that all domain events are classes.
 
 ```csharp
-public class CardUpdated : IDomainEvent
+public class CardUpdated : IOccurrence
 {
     // properties in here
 }

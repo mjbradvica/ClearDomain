@@ -3,12 +3,12 @@
 // </copyright>
 
 using ClearDomain.Common;
-using MediatR;
+using NMediation.Abstractions;
 
 namespace ClearDomain.Samples.MediatorGuid
 {
     /// <inheritdoc />
-    public interface IAggregateRoot : IAggregateRoot<Guid, INotification>
+    public interface IAggregateRoot : IAggregateRoot<Guid, IOccurrence>
     {
     }
 }
