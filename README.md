@@ -52,7 +52,7 @@ If you would like code samples for ClearDomain, they may be found [here in the d
 
 ## Dependencies
 
-ClearDomain has no dependencies on any external Microsoft or third-party packages.
+ClearDomain uses a single dependency on the [NMediation.Abstractions](https://www.nuget.org/packages/NMediation.Abstractions) package to provide a common interface for simplicity.
 
 ClearDomain.Identity has a dependency on the ClearDomain base package and the [Microsoft.Extensions.Identity.Stores](https://www.nuget.org/packages/Microsoft.Extensions.Identity.Stores) package.
 
@@ -218,7 +218,7 @@ public class ShoppingCart : AggregateRoot
 
 ### Domain Events
 
-Domain Events in ClearDomain need to be inherited from the [IOccurrence](https://github.com/mjbradvica/ClearDomain/blob/master/source/ClearDomain/Common/IOccurrence.cs) interface. This is an empty constraint used to enforce that all domain events are classes.
+Domain Events in ClearDomain need to be inherited from the [IOccurrence](https://github.com/mjbradvica/NMediation/blob/master/source/NMediation.Abstractions/IOccurrence.cs) interface. This is an empty constraint used to enforce that all domain events are classes.
 
 ```csharp
 public class CardUpdated : IOccurrence
@@ -344,14 +344,14 @@ You may do the same for your AggregateRoots.
 
 > The Microsoft base IdentityUser class has full public getters and setters. Utilizing constructors for your IdentityUser classes may not be worth it.
 
-### Domain Events with MediatR or NServiceBus
+### Domain Events with other publishers
 
-If you are using [MediatR](https://github.com/jbogard/MediatR) to publish events, you may create a new IAggregateRoot interface and AggregateRoot base class with the type of the DomainEvent you wish to use.
+If you are using a different publisher, you may create a new IAggregateRoot interface and AggregateRoot base class with the type of the DomainEvent you wish to use.
 
-The example below shows you how easily you can use the INotification interface for MediatR instead of the default interface as your domain event.
+The example below shows you how easily you can use a difference interface instead of the default as your domain event.
 
 ```csharp
-public interface IAggregateRoot : IAggregateRoot<Guid, INotification>
+public interface IAggregateRoot : IAggregateRoot<Guid, IDomainEvent>
 {
 }
 ```
@@ -359,7 +359,7 @@ public interface IAggregateRoot : IAggregateRoot<Guid, INotification>
 You will need to create a new base AggregateRoot class that like so. You will inherit from the Common AggregateRoot<TId, TEvent> and the interface you just created.
 
 ```csharp
-public abstract class AggregateRoot : AggregateRoot<Guid, INotification>, IAggregateRoot
+public abstract class AggregateRoot : AggregateRoot<Guid, IDomainEvent>, IAggregateRoot
 {
     protected AggregateRoot()
         : base(Guid.NewGuid())
@@ -373,7 +373,7 @@ public abstract class AggregateRoot : AggregateRoot<Guid, INotification>, IAggre
 }
 ```
 
-> You can use this same pattern for any other interface constraint and the type of the Id that you choose.
+> This may be used again for any other interface constraint and the type of the identifier that you choose.
 
 ### Using a Different Identifier Type
 
