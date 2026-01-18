@@ -4,7 +4,7 @@ A collection of base classes and interfaces for DDD (Domain Driven Design) proje
 
 ![TempIcon](https://i.imgur.com/Aj5IVzo.jpg)
 
-![build-status](https://github.com/mjbradvica/ClearDomain/workflows/main/badge.svg) ![downloads](https://img.shields.io/nuget/dt/ClearDomain) ![downloads](https://img.shields.io/nuget/v/ClearDomain) ![activity](https://img.shields.io/github/last-commit/mjbradvica/ClearDomain/master)
+![build-status](https://github.com/mjbradvica/ClearDomain/workflows/main/badge.svg) ![downloads](https://img.shields.io/nuget/dt/ClearDomain) ![nuget](https://img.shields.io/nuget/v/ClearDomain) ![activity](https://img.shields.io/github/last-commit/mjbradvica/ClearDomain/master)
 
 ## Overview
 
@@ -48,7 +48,7 @@ ClearDomain gives you:
 
 ## Samples
 
-If you would like code samples for ClearDomain, they may be found [here](https://github.com/mjbradvica/ClearDomain/tree/master/samples/ClearDomain.Samples).
+If you would like code samples for ClearDomain, they may be found [here in the documentation](https://github.com/mjbradvica/ClearDomain/tree/master/samples/ClearDomain.Samples).
 
 ## Dependencies
 
@@ -81,7 +81,7 @@ ClearDomain gives you:
 - Aggregate Roots with an interface constraint
 - An empty interface used to constrain a Domain Event
 
-ClearDomain.Identity provides:
+ClearDomain-Identity provides:
 
 - All of the above
 - An IdentityUser class variant in integer, string, long, or Guid format
@@ -162,7 +162,7 @@ var areEqual = first.Equals(second);
 var bad = first == second;
 ```
 
-> Always use the Equals method for Entity equality comparison. More details are available [here](#entity-equality-details).
+> Always use the Equals method for Entity equality comparison. More details are available [here in this section](#entity-equality-details).
 
 Entities have a default constructor that may be initialized during creation.
 
@@ -177,7 +177,7 @@ var airplane = new Airplane
 };
 ```
 
-> All entities use the "init" keyword for setters. The Id value may be set during object initialization, but not afterwards. This is to preserve encapsulation.
+> All entities use the "init" keyword for setters. The Id value may be set during object initialization, but not afterward. This is to preserve encapsulation.
 
 If you choose to use either Guid or string-based entities, the default constructor will initialize your object with an identifier value for you.
 
@@ -237,9 +237,9 @@ The base IdentityUser class has been extended to support the same interfaces as 
 
 Have your class inherit from the [ClearDomainIdentityUser](https://github.com/mjbradvica/ClearDomain/blob/development/source/ClearDomain.Identity/Common/ClearDomainIdentityUser.cs) class of your choice. As always, the type of the identifier is determined by what namespace you import.
 
-> Unlike other Guid and string variants, the IdentityUser versions do no automatically create an identifier for you.
+> Unlike other Guid and string variants, the IdentityUser versions do not automatically create an identifier for you.
 
-All of the ClearDomainIdentityUser base classes have the same constructors as the standard IdentityUser class. This is due to almost all properties being virtual.
+All the ClearDomainIdentityUser base classes have the same constructors as the standard IdentityUser class. This is due to almost all properties being virtual.
 
 ```csharp
 using ClearDomain.Identity.GuidPrimary;
@@ -295,9 +295,9 @@ var areSame = plane == plane2;
 
 Unlike the Equals method, the "==" and "!=" can only be used against the same base type, not a set of interfaces. This could lead to undefined behavior, especially if you tried the operator with an "Entity" and "IdentityUser". They share the same interfaces, but calling the == on them would return false even if they had the same identifier.
 
-Equality in C# is an advanced and difficult subject matter with lots of rules to follow. ClearDomain attempts to give you the user the easiest API to follow--but is still required to follow the rules of the language.
+Equality in C# is an advanced and difficult subject with lots of rules to follow. ClearDomain attempts to give you the user the easiest API to follow--but is still required to follow the rules of the language.
 
-> We recommend using the Equals() method for everything so there will never be an issue.
+> We recommend using the Equals() method for everything, there will never be an issue this way.
 
 ### AggregateRoot Constraints
 
@@ -391,7 +391,7 @@ Due to the base properties being virtual, all ClearDomainIdentityUser classes ha
 1. You need to initialize the identifier value.
 2. There are no null or empty identifier checks built in.
 
-Even though all of the properties have public setters. You can still have a limited set of checks and balances with a custom constructor.
+Even though all the properties have public setters. You can still have a limited set of checks and balances with a custom constructor.
 
 ```csharp
 using ClearDomain.Identity.GuidPrimary;
