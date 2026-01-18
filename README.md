@@ -2,7 +2,7 @@
 
 A collection of base classes and interfaces for DDD (Domain Driven Design) projects.
 
-![TempIcon](https://i.imgur.com/Aj5IVzo.jpg)
+![TempIcon](https://i.imgur.com/4OH39Q3.png)
 
 ![build-status](https://github.com/mjbradvica/ClearDomain/workflows/main/badge.svg) ![downloads](https://img.shields.io/nuget/dt/ClearDomain) ![nuget](https://img.shields.io/nuget/v/ClearDomain) ![activity](https://img.shields.io/github/last-commit/mjbradvica/ClearDomain/master)
 
