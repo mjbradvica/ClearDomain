@@ -14,7 +14,7 @@
     <PackageTags>ddd, domain, domain-driven-design</PackageTags>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageIcon>logo.png</PackageIcon>
-    <Version>0.9.6</Version>
+    <Version>0.9.7</Version>
   </PropertyGroup>
 
   <ItemGroup>
@@ -33,13 +33,8 @@
   </ItemGroup>
   
   <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.Identity.Stores">
-      <Version>10.0.2</Version>
-    </PackageReference>
-  </ItemGroup>
-  
-  <ItemGroup>
-    <ProjectReference Include="..\ClearDomain\ClearDomain.csproj" />
+    <PackageReference Include="ClearDomain" Version="0.9.7" />
+    <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="10.0.2" />
   </ItemGroup>
 
 </Project>
