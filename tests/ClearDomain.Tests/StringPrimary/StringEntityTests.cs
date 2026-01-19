@@ -18,7 +18,7 @@ namespace ClearDomain.Tests.StringPrimary
         /// Ensure the identifier is initialized by default.
         /// </summary>
         [TestMethod]
-        public void DefaultConstructor_InstantiatesId()
+        public void DefaultConstructorInstantiatesId()
         {
             var entity = new TestStringEntity();
 
@@ -29,7 +29,7 @@ namespace ClearDomain.Tests.StringPrimary
         /// Ensures the string entity has the correct types.
         /// </summary>
         [TestMethod]
-        public void Entity_HasTheCorrectTypes()
+        public void EntityHasTheCorrectTypes()
         {
             var entity = new TestStringEntity();
 

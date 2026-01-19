@@ -3,12 +3,12 @@
 // </copyright>
 
 using ClearDomain.Common;
-using MediatR;
+using NMediation.Abstractions;
 
 namespace ClearDomain.Samples.MediatorGuid
 {
     /// <inheritdoc cref="IAggregateRoot" />
-    public abstract class AggregateRoot : AggregateRoot<Guid, INotification>, IAggregateRoot
+    public abstract class AggregateRoot : AggregateRoot<Guid, IOccurrence>, IAggregateRoot
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="AggregateRoot"/> class.

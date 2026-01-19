@@ -2,14 +2,8 @@
 // Copyright (c) Simplex Software LLC. All rights reserved.
 // </copyright>
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ClearDomain.Tests.Common;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ClearDomain.Tests.IntPrimary
 {
@@ -18,17 +12,22 @@ namespace ClearDomain.Tests.IntPrimary
     public class IntEfTests : BaseEfTest
     {
         /// <summary>
+        /// Gets or sets the test context.
+        /// </summary>
+        public TestContext TestContext { get; set; }
+
+        /// <summary>
         /// Ensures an entity can be persisted correctly.
         /// </summary>
         /// <returns>A <see cref="Task"/> representing the asynchronous unit test.</returns>
         [TestMethod]
-        public async Task Entity_EF_CanBePersisted()
+        public async Task EntityEfCanBePersisted()
         {
             await using (var context = new TestDbContext(ContextOptions))
             {
-                await context.IntEntities.AddAsync(new TestIntEntity());
+                await context.IntEntities.AddAsync(new TestIntEntity(), TestContext.CancellationToken);
 
-                await context.SaveChangesAsync();
+                await context.SaveChangesAsync(TestContext.CancellationToken);
             }
         }
 
@@ -37,21 +36,21 @@ namespace ClearDomain.Tests.IntPrimary
         /// </summary>
         /// <returns>A <see cref="Task"/> representing the asynchronous unit test.</returns>
         [TestMethod]
-        public async Task Entity_EF_CanBeRetrieved()
+        public async Task EntityEfCanBeRetrieved()
         {
             await using (var context = new TestDbContext(ContextOptions))
             {
-                await context.IntEntities.AddAsync(new TestIntEntity());
+                await context.IntEntities.AddAsync(new TestIntEntity(), TestContext.CancellationToken);
 
-                await context.SaveChangesAsync();
+                await context.SaveChangesAsync(TestContext.CancellationToken);
             }
 
             await using (var context = new TestDbContext(ContextOptions))
             {
-                var result = await context.IntEntities.ToListAsync();
+                var result = await context.IntEntities.ToListAsync(TestContext.CancellationToken);
 
                 Assert.IsNotNull(result.First());
-                Assert.IsTrue(result.First().Id > 0);
+                Assert.IsGreaterThan(0, result.First().Id);
             }
         }
 
@@ -60,15 +59,15 @@ namespace ClearDomain.Tests.IntPrimary
         /// </summary>
         /// <returns>A <see cref="Task"/> representing the asynchronous unit test.</returns>
         [TestMethod]
-        public async Task IdentityUser_EF_CanBePersisted()
+        public async Task IdentityUserEfCanBePersisted()
         {
             await using (var context = new TestDbContext(ContextOptions))
             {
                 var user = new TestIntIdentityUser();
 
-                await context.IntIdentityUsers.AddAsync(user);
+                await context.IntIdentityUsers.AddAsync(user, TestContext.CancellationToken);
 
-                await context.SaveChangesAsync();
+                await context.SaveChangesAsync(TestContext.CancellationToken);
             }
         }
 
@@ -77,21 +76,21 @@ namespace ClearDomain.Tests.IntPrimary
         /// </summary>
         /// <returns>A <see cref="Task"/> representing the asynchronous unit test.</returns>
         [TestMethod]
-        public async Task IdentityUser_EF_CanBeRetrieved()
+        public async Task IdentityUserEfCanBeRetrieved()
         {
             await using (var context = new TestDbContext(ContextOptions))
             {
-                await context.IntIdentityUsers.AddAsync(new TestIntIdentityUser());
+                await context.IntIdentityUsers.AddAsync(new TestIntIdentityUser(), TestContext.CancellationToken);
 
-                await context.SaveChangesAsync();
+                await context.SaveChangesAsync(TestContext.CancellationToken);
             }
 
             await using (var context = new TestDbContext(ContextOptions))
             {
-                var result = await context.IntIdentityUsers.ToListAsync();
+                var result = await context.IntIdentityUsers.ToListAsync(TestContext.CancellationToken);
 
                 Assert.IsNotNull(result.First());
-                Assert.IsTrue(result.First().Id > 0);
+                Assert.IsGreaterThan(0, result.First().Id);
             }
         }
     }

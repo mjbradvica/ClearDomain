@@ -3,7 +3,6 @@
 // </copyright>
 
 using ClearDomain.Tests.Common;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MongoDB.Driver;
 
 namespace ClearDomain.Tests.LongPrimary
@@ -15,17 +14,22 @@ namespace ClearDomain.Tests.LongPrimary
     public class LongMongoTests : BaseMongoTest
     {
         /// <summary>
+        /// Gets or sets the text context.
+        /// </summary>
+        public TestContext TestContext { get; set; }
+
+        /// <summary>
         /// Ensures an entity can be persisted correctly.
         /// </summary>
         /// <returns>A <see cref="Task"/> representing the asynchronous unit test.</returns>
         [TestMethod]
-        public async Task Entity_Mongo_CanBePersisted()
+        public async Task EntityMongoCanBePersisted()
         {
             var client = new MongoClient(TestHelpers.MongoConnectionString());
 
             var collection = client.GetDatabase("clear_domain").GetCollection<TestLongEntity>("long_entities");
 
-            await collection.InsertOneAsync(new TestLongEntity(1));
+            await collection.InsertOneAsync(new TestLongEntity(1), cancellationToken: TestContext.CancellationToken);
         }
 
         /// <summary>
@@ -33,7 +37,7 @@ namespace ClearDomain.Tests.LongPrimary
         /// </summary>
         /// <returns>A <see cref="Task"/> representing the asynchronous unit test.</returns>
         [TestMethod]
-        public async Task Entity_Mongo_CanBeRetrieved()
+        public async Task EntityMongoCanBeRetrieved()
         {
             const int id = 1;
 
@@ -41,15 +45,15 @@ namespace ClearDomain.Tests.LongPrimary
 
             var collection = client.GetDatabase("clear_domain").GetCollection<TestLongEntity>("long_entities");
 
-            await collection.InsertOneAsync(new TestLongEntity(id));
+            await collection.InsertOneAsync(new TestLongEntity(id), cancellationToken: TestContext.CancellationToken);
 
             var filter = Builders<TestLongEntity>.Filter.Eq(x => x.Id, id);
 
-            var result = await collection.FindAsync(filter);
+            var result = await collection.FindAsync(filter, cancellationToken: TestContext.CancellationToken);
 
             IEnumerable<TestLongEntity> results = new List<TestLongEntity>();
 
-            if (await result.MoveNextAsync())
+            if (await result.MoveNextAsync(TestContext.CancellationToken))
             {
                 results = result.Current;
             }

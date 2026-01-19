@@ -3,7 +3,7 @@
 // </copyright>
 
 using ClearDomain.Tests.Common;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Microsoft.EntityFrameworkCore;
 
 namespace ClearDomain.Tests.GuidPrimary
 {
@@ -12,17 +12,22 @@ namespace ClearDomain.Tests.GuidPrimary
     public class GuidEfTests : BaseEfTest
     {
         /// <summary>
+        /// Gets or sets the text context.
+        /// </summary>
+        public TestContext TestContext { get; set; }
+
+        /// <summary>
         /// Ensures an entity can be persisted correctly.
         /// </summary>
         /// <returns>A <see cref="Task"/> representing the asynchronous unit test.</returns>
         [TestMethod]
-        public async Task Entity_EF_CanBePersisted()
+        public async Task EntityEfCanBePersisted()
         {
             await using (var context = new TestDbContext(ContextOptions))
             {
-                await context.GuidEntities.AddAsync(new TestGuidEntity(Guid.NewGuid()));
+                await context.GuidEntities.AddAsync(new TestGuidEntity(Guid.NewGuid()), TestContext.CancellationToken);
 
-                await context.SaveChangesAsync();
+                await context.SaveChangesAsync(TestContext.CancellationToken);
             }
         }
 
@@ -31,20 +36,20 @@ namespace ClearDomain.Tests.GuidPrimary
         /// </summary>
         /// <returns>A <see cref="Task"/> representing the asynchronous unit test.</returns>
         [TestMethod]
-        public async Task Entity_EF_CanBeRetrieved()
+        public async Task EntityEfCanBeRetrieved()
         {
             var id = Guid.NewGuid();
 
             await using (var context = new TestDbContext(ContextOptions))
             {
-                await context.GuidEntities.AddAsync(new TestGuidEntity(id));
+                await context.GuidEntities.AddAsync(new TestGuidEntity(id), TestContext.CancellationToken);
 
-                await context.SaveChangesAsync();
+                await context.SaveChangesAsync(TestContext.CancellationToken);
             }
 
             await using (var context = new TestDbContext(ContextOptions))
             {
-                var result = await context.GuidEntities.FindAsync(id);
+                var result = await context.GuidEntities.FirstOrDefaultAsync(x => x.Id == id, TestContext.CancellationToken);
 
                 Assert.IsNotNull(result);
                 Assert.AreEqual(id, result.Id);
@@ -56,7 +61,7 @@ namespace ClearDomain.Tests.GuidPrimary
         /// </summary>
         /// <returns>A <see cref="Task"/> representing the asynchronous unit test.</returns>
         [TestMethod]
-        public async Task IdentityUser_EF_CanBePersisted()
+        public async Task IdentityUserEfCanBePersisted()
         {
             await using (var context = new TestDbContext(ContextOptions))
             {
@@ -65,9 +70,9 @@ namespace ClearDomain.Tests.GuidPrimary
                     Id = Guid.NewGuid(),
                 };
 
-                await context.GuidIdentityUsers.AddAsync(user);
+                await context.GuidIdentityUsers.AddAsync(user, TestContext.CancellationToken);
 
-                await context.SaveChangesAsync();
+                await context.SaveChangesAsync(TestContext.CancellationToken);
             }
         }
 
@@ -76,20 +81,20 @@ namespace ClearDomain.Tests.GuidPrimary
         /// </summary>
         /// <returns>A <see cref="Task"/> representing the asynchronous unit test.</returns>
         [TestMethod]
-        public async Task IdentityUser_EF_CanBeRetrieved()
+        public async Task IdentityUserEfCanBeRetrieved()
         {
             var id = Guid.NewGuid();
 
             await using (var context = new TestDbContext(ContextOptions))
             {
-                await context.GuidIdentityUsers.AddAsync(new TestGuidIdentityUser { Id = id });
+                await context.GuidIdentityUsers.AddAsync(new TestGuidIdentityUser { Id = id }, TestContext.CancellationToken);
 
-                await context.SaveChangesAsync();
+                await context.SaveChangesAsync(TestContext.CancellationToken);
             }
 
             await using (var context = new TestDbContext(ContextOptions))
             {
-                var result = await context.GuidIdentityUsers.FindAsync(id);
+                var result = await context.GuidIdentityUsers.FirstOrDefaultAsync(x => x.Id == id, TestContext.CancellationToken);
 
                 Assert.IsNotNull(result);
                 Assert.AreEqual(id, result.Id);

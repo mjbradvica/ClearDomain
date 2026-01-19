@@ -37,7 +37,7 @@ namespace ClearDomain.Common
             {
                 if (guidId == Guid.Empty)
                 {
-                    throw new NullReferenceException(nameof(Id));
+                    throw new ArgumentNullException(nameof(id), "Id was an empty Guid.");
                 }
             }
 
@@ -45,7 +45,7 @@ namespace ClearDomain.Common
             {
                 if (intId <= 0)
                 {
-                    throw new NullReferenceException(nameof(Id));
+                    throw new ArgumentNullException(nameof(id), "Id must be greater than zero.");
                 }
             }
 
@@ -53,7 +53,7 @@ namespace ClearDomain.Common
             {
                 if (longId <= 0)
                 {
-                    throw new NullReferenceException(nameof(Id));
+                    throw new ArgumentNullException(nameof(id), "Id must be greater than zero.");
                 }
             }
 
@@ -61,7 +61,7 @@ namespace ClearDomain.Common
             {
                 if (string.IsNullOrWhiteSpace(stringId))
                 {
-                    throw new NullReferenceException(nameof(Id));
+                    throw new ArgumentNullException(nameof(id), "Id was an empty Guid.");
                 }
             }
         }

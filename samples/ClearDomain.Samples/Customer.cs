@@ -31,7 +31,7 @@ namespace ClearDomain.Samples
 
             if (Id == Guid.Empty)
             {
-                throw new NullReferenceException(nameof(id));
+                throw new ArgumentNullException(nameof(id));
             }
         }
     }

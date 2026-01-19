@@ -11,6 +11,7 @@ namespace ClearDomain.StringPrimary
     /// </summary>
     public abstract class Entity : Entity<string>, IEntity
     {
+#if NET8_0
         /// <summary>
         /// Initializes a new instance of the <see cref="Entity"/> class.
         /// </summary>
@@ -18,6 +19,15 @@ namespace ClearDomain.StringPrimary
             : this(Guid.NewGuid().ToString())
         {
         }
+#else
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Entity"/> class.
+        /// </summary>
+        protected Entity()
+            : this(Guid.CreateVersion7().ToString())
+        {
+        }
+#endif
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Entity"/> class.

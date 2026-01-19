@@ -18,7 +18,7 @@ namespace ClearDomain.Tests.LongPrimary
         /// Ensures the long entity has the correct types.
         /// </summary>
         [TestMethod]
-        public void Entity_HasTheCorrectTypes()
+        public void EntityHasTheCorrectTypes()
         {
             var entity = new TestLongEntity();
 

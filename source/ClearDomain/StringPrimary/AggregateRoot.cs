@@ -3,21 +3,32 @@
 // </copyright>
 
 using ClearDomain.Common;
+using NMediation.Abstractions;
 
 namespace ClearDomain.StringPrimary
 {
     /// <summary>
     /// Base class for all <see cref="string"/> aggregate roots.
     /// </summary>
-    public abstract class AggregateRoot : AggregateRoot<string, IDomainEvent>, IAggregateRoot
+    public abstract class AggregateRoot : AggregateRoot<string, IOccurrence>, IAggregateRoot
     {
+#if NET8_0
         /// <summary>
         /// Initializes a new instance of the <see cref="AggregateRoot"/> class.
         /// </summary>
         protected AggregateRoot()
-            : base(Guid.NewGuid().ToString())
+            : this(Guid.NewGuid().ToString())
         {
         }
+#else
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AggregateRoot"/> class.
+        /// </summary>
+        protected AggregateRoot()
+            : this(Guid.CreateVersion7().ToString())
+        {
+        }
+#endif
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AggregateRoot"/> class.

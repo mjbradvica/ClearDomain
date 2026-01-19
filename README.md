@@ -2,9 +2,9 @@
 
 A collection of base classes and interfaces for DDD (Domain Driven Design) projects.
 
-![TempIcon](https://i.imgur.com/Aj5IVzo.jpg)
+![TempIcon](https://i.imgur.com/4OH39Q3.png)
 
-![build-status](https://github.com/mjbradvica/ClearDomain/workflows/main/badge.svg) ![downloads](https://img.shields.io/nuget/dt/ClearDomain) ![downloads](https://img.shields.io/nuget/v/ClearDomain) ![activity](https://img.shields.io/github/last-commit/mjbradvica/ClearDomain/master)
+![build-status](https://github.com/mjbradvica/ClearDomain/workflows/main/badge.svg) ![downloads](https://img.shields.io/nuget/dt/ClearDomain) ![nuget](https://img.shields.io/nuget/v/ClearDomain) ![activity](https://img.shields.io/github/last-commit/mjbradvica/ClearDomain/master)
 
 ## Overview
 
@@ -35,7 +35,7 @@ ClearDomain gives you:
     - [Entity Constraints](#entity-constraints)
     - [AggregateRoot Constraints](#aggregateroot-constraints)
     - [Entity \& AggregateRoot Encapsulation](#entity--aggregateroot-encapsulation)
-    - [Domain Events with MediatR or NServiceBus](#domain-events-with-mediatr-or-nservicebus)
+    - [Domain Events with other Publishers](#domain-events-with-other-publishers)
     - [Using a Different Identifier Type](#using-a-different-identifier-type)
   - [Identity User Creation](#identity-user-creation)
   - [Identity User Types](#identity-user-types)
@@ -48,11 +48,11 @@ ClearDomain gives you:
 
 ## Samples
 
-If you would like code samples for ClearDomain, they may be found [here](https://github.com/mjbradvica/ClearDomain/tree/master/samples/ClearDomain.Samples).
+If you would like code samples for ClearDomain, they may be found [here in the documentation](https://github.com/mjbradvica/ClearDomain/tree/master/samples/ClearDomain.Samples).
 
 ## Dependencies
 
-ClearDomain has no dependencies on any external Microsoft or third-party packages.
+ClearDomain uses a single dependency on the [NMediation.Abstractions](https://www.nuget.org/packages/NMediation.Abstractions) package to provide a common interface for simplicity.
 
 ClearDomain.Identity has a dependency on the ClearDomain base package and the [Microsoft.Extensions.Identity.Stores](https://www.nuget.org/packages/Microsoft.Extensions.Identity.Stores) package.
 
@@ -81,7 +81,7 @@ ClearDomain gives you:
 - Aggregate Roots with an interface constraint
 - An empty interface used to constrain a Domain Event
 
-ClearDomain.Identity provides:
+ClearDomain-Identity provides:
 
 - All of the above
 - An IdentityUser class variant in integer, string, long, or Guid format
@@ -92,6 +92,14 @@ ClearDomain.Identity provides:
 Equality in dotnet is confusing and difficult to grasp if you are not aware of all the rules. ClearDomain is an attempt to remove some of the nuance and semantics around equality. It also provides a foundation for writing solid software with a small set of classes and interfaces you can build upon.
 
 > You can still use ClearDomain even if your application is not strictly Domain Driven Design oriented.
+
+## Complimentary Libraries
+
+ClearDomain is part of the Simplex Software family, if you enjoy ClearDomain take a look at:
+
+[RapidLaunch uses ClearDomain Aggregate Roots.](https://github.com/mjbradvica/RapidLaunch)
+[NMedation is the underlying domain event for ClearDomain.](https://github.com/mjbradvica/NMediation)
+[FactoryFoundation for easy, type-safe mapping for entities.](https://github.com/mjbradvica/FactoryFoundation)
 
 ## Quick Start
 
@@ -162,7 +170,7 @@ var areEqual = first.Equals(second);
 var bad = first == second;
 ```
 
-> Always use the Equals method for Entity equality comparison. More details are available [here](#entity-equality-details).
+> Always use the Equals method for Entity equality comparison. More details are available [here in this section](#entity-equality-details).
 
 Entities have a default constructor that may be initialized during creation.
 
@@ -177,7 +185,7 @@ var airplane = new Airplane
 };
 ```
 
-> All entities use the "init" keyword for setters. The Id value may be set during object initialization, but not afterwards. This is to preserve encapsulation.
+> All entities use the "init" keyword for setters. The Id value may be set during object initialization, but not afterward. This is to preserve encapsulation.
 
 If you choose to use either Guid or string-based entities, the default constructor will initialize your object with an identifier value for you.
 
@@ -218,10 +226,10 @@ public class ShoppingCart : AggregateRoot
 
 ### Domain Events
 
-Domain Events in ClearDomain need to be inherited from the [IDomainEvent](https://github.com/mjbradvica/ClearDomain/blob/master/source/ClearDomain/Common/IDomainEvent.cs) interface. This is an empty constraint used to enforce that all domain events are classes.
+Domain Events in ClearDomain need to be inherited from the [IOccurrence](https://github.com/mjbradvica/NMediation/blob/master/source/NMediation.Abstractions/IOccurrence.cs) interface. This is an empty constraint used to enforce that all domain events are classes.
 
 ```csharp
-public class CardUpdated : IDomainEvent
+public class CardUpdated : IOccurrence
 {
     // properties in here
 }
@@ -231,15 +239,49 @@ Use and publish a Domain Event when an Aggregate or model has something interest
 
 The main benefit of using events is the ability to decouple your application from hard dependencies by publishing events. Customers may subscribe to specific events to implement accordingly.
 
+[NMedation](https://github.com/mjbradvica/NMediation) is the best and easiest way to publish your domain events.
+
+#### Publishing Domain Events
+
+The easiest and best way to publish domain events in your application is to use [NMediation](https://github.com/mjbradvica/NMediation).
+
+The following is a simple example of saving an Aggregate Root and looping through all events to publish.
+
+```csharp
+public class MyRepository
+{
+    private readonly IMediation _mediation;
+    private readonly DbContext _context;
+
+    public MyRepository(IMediation mediation, DbContext context)
+    {
+        _mediation = mediation;
+        _context = context;
+    }
+
+    public async Task SaveRoot(MyAggregateRoot root)
+    {
+        await _context.SaveAsync(root);
+
+        await _context.SaveChangesAsync();
+
+        foreach(var domainEvent in root.DomainEvents)
+        {
+            await _mediation.Publish(domainEvent);
+        }
+    }
+}
+```
+
 ### Identity User
 
 The base IdentityUser class has been extended to support the same interfaces as Entities and Aggregate Roots.
 
 Have your class inherit from the [ClearDomainIdentityUser](https://github.com/mjbradvica/ClearDomain/blob/development/source/ClearDomain.Identity/Common/ClearDomainIdentityUser.cs) class of your choice. As always, the type of the identifier is determined by what namespace you import.
 
-> Unlike other Guid and string variants, the IdentityUser versions do no automatically create an identifier for you.
+> Unlike other Guid and string variants, the IdentityUser versions do not automatically create an identifier for you.
 
-All of the ClearDomainIdentityUser base classes have the same constructors as the standard IdentityUser class. This is due to almost all properties being virtual.
+All the ClearDomainIdentityUser base classes have the same constructors as the standard IdentityUser class. This is due to almost all properties being virtual.
 
 ```csharp
 using ClearDomain.Identity.GuidPrimary;
@@ -295,9 +337,9 @@ var areSame = plane == plane2;
 
 Unlike the Equals method, the "==" and "!=" can only be used against the same base type, not a set of interfaces. This could lead to undefined behavior, especially if you tried the operator with an "Entity" and "IdentityUser". They share the same interfaces, but calling the == on them would return false even if they had the same identifier.
 
-Equality in C# is an advanced and difficult subject matter with lots of rules to follow. ClearDomain attempts to give you the user the easiest API to follow--but is still required to follow the rules of the language.
+Equality in C# is an advanced and difficult subject with lots of rules to follow. ClearDomain attempts to give you the user the easiest API to follow--but is still required to follow the rules of the language.
 
-> We recommend using the Equals() method for everything so there will never be an issue.
+> We recommend using the Equals() method for everything, there will never be an issue this way.
 
 ### AggregateRoot Constraints
 
@@ -344,14 +386,14 @@ You may do the same for your AggregateRoots.
 
 > The Microsoft base IdentityUser class has full public getters and setters. Utilizing constructors for your IdentityUser classes may not be worth it.
 
-### Domain Events with MediatR or NServiceBus
+### Domain Events with other publishers
 
-If you are using [MediatR](https://github.com/jbogard/MediatR) to publish events, you may create a new IAggregateRoot interface and AggregateRoot base class with the type of the DomainEvent you wish to use.
+If you are using a different publisher, you may create a new IAggregateRoot interface and AggregateRoot base class with the type of the DomainEvent you wish to use.
 
-The example below shows you how easily you can use the INotification interface for MediatR instead of the default interface as your domain event.
+The example below shows you how easily you can use a difference interface instead of the default as your domain event.
 
 ```csharp
-public interface IAggregateRoot : IAggregateRoot<Guid, INotification>
+public interface IAggregateRoot : IAggregateRoot<Guid, IDomainEvent>
 {
 }
 ```
@@ -359,7 +401,7 @@ public interface IAggregateRoot : IAggregateRoot<Guid, INotification>
 You will need to create a new base AggregateRoot class that like so. You will inherit from the Common AggregateRoot<TId, TEvent> and the interface you just created.
 
 ```csharp
-public abstract class AggregateRoot : AggregateRoot<Guid, INotification>, IAggregateRoot
+public abstract class AggregateRoot : AggregateRoot<Guid, IDomainEvent>, IAggregateRoot
 {
     protected AggregateRoot()
         : base(Guid.NewGuid())
@@ -373,7 +415,7 @@ public abstract class AggregateRoot : AggregateRoot<Guid, INotification>, IAggre
 }
 ```
 
-> You can use this same pattern for any other interface constraint and the type of the Id that you choose.
+> This may be used again for any other interface constraint and the type of the identifier that you choose.
 
 ### Using a Different Identifier Type
 
@@ -391,7 +433,7 @@ Due to the base properties being virtual, all ClearDomainIdentityUser classes ha
 1. You need to initialize the identifier value.
 2. There are no null or empty identifier checks built in.
 
-Even though all of the properties have public setters. You can still have a limited set of checks and balances with a custom constructor.
+Even though all the properties have public setters. You can still have a limited set of checks and balances with a custom constructor.
 
 ```csharp
 using ClearDomain.Identity.GuidPrimary;
@@ -474,3 +516,7 @@ Finally, Aggregates are persisted via Repositories (not part of this package) an
 ### How is equality for Entities and AggregateRoots calculated?
 
 All equality is based on the [IEntity](https://github.com/mjbradvica/ClearDomain/blob/master/source/ClearDomain/Common/IEntity.cs) of type T interface. This is the most basic type in ClearDomain.
+
+### How do I publish Domain Events?
+
+Because you are already using the correct interface, [NMediation](https://github.com/mjbradvica/NMediation) is the easiest and best way to publish your events. It takes 5 minutes to set up.

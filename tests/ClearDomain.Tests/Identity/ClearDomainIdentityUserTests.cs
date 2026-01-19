@@ -5,6 +5,7 @@
 using ClearDomain.Common;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NMediation.Abstractions;
 
 namespace ClearDomain.Tests.Identity
 {
@@ -18,7 +19,7 @@ namespace ClearDomain.Tests.Identity
         /// Ensures all properties are initialized on creation.
         /// </summary>
         [TestMethod]
-        public void UserNameConstructor_InitializesProperties()
+        public void UserNameConstructorInitializesProperties()
         {
             var user = new TestIdentityUser("user");
 
@@ -29,7 +30,7 @@ namespace ClearDomain.Tests.Identity
         /// Ensures entity equals is correct.
         /// </summary>
         [TestMethod]
-        public void Equals_NullOther_ReturnsCorrectResponse()
+        public void EqualsNullOtherReturnsCorrectResponse()
         {
             var user = new TestIdentityUser();
 
@@ -42,7 +43,7 @@ namespace ClearDomain.Tests.Identity
         /// Ensures entity equals is correct.
         /// </summary>
         [TestMethod]
-        public void Equals_NullId_ReturnsCorrectResponse()
+        public void EqualsNullIdReturnsCorrectResponse()
         {
             var user = new TestIdentityUser();
 
@@ -57,7 +58,7 @@ namespace ClearDomain.Tests.Identity
         /// Ensures entity equals is correct.
         /// </summary>
         [TestMethod]
-        public void Equals_Successful_ReturnsCorrectResponse()
+        public void EqualsSuccessfulReturnsCorrectResponse()
         {
             var id = Guid.NewGuid().ToString();
 
@@ -80,7 +81,7 @@ namespace ClearDomain.Tests.Identity
         /// Ensures equals only runs for the correct type.
         /// </summary>
         [TestMethod]
-        public void Equals_CorrectType_ReturnsCorrectResponse()
+        public void EqualsCorrectTypeReturnsCorrectResponse()
         {
             var id = Guid.NewGuid().ToString();
 
@@ -103,7 +104,7 @@ namespace ClearDomain.Tests.Identity
         /// Ensures equals only runs for the correct type.
         /// </summary>
         [TestMethod]
-        public void Equals_IncorrectType_ReturnsCorrectResponse()
+        public void EqualsIncorrectTypeReturnsCorrectResponse()
         {
             var user = new TestIdentityUser();
 
@@ -118,20 +119,20 @@ namespace ClearDomain.Tests.Identity
         /// Ensures hash code is above floor.
         /// </summary>
         [TestMethod]
-        public void GetHashCode_IsAboveMinimum()
+        public void GetHashCodeIsAboveMinimum()
         {
             var user = new TestIdentityUser();
 
             var hash = user.GetHashCode();
 
-            Assert.IsTrue(hash > 0);
+            Assert.IsGreaterThan(0, hash);
         }
 
         /// <summary>
         /// Ensures domain events are added.
         /// </summary>
         [TestMethod]
-        public void AppendDomainEvent_IsAppended()
+        public void AppendDomainEventIsAppended()
         {
             var user = new TestIdentityUser();
 
@@ -144,12 +145,12 @@ namespace ClearDomain.Tests.Identity
         /// Class has correct types.
         /// </summary>
         [TestMethod]
-        public void Class_HasCorrectTypes()
+        public void ClassHasCorrectTypes()
         {
             var user = new TestIdentityUser();
 
             Assert.IsInstanceOfType<IdentityUser<string>>(user);
-            Assert.IsInstanceOfType<IAggregateRoot<string, IDomainEvent>>(user);
+            Assert.IsInstanceOfType<IAggregateRoot<string, IOccurrence>>(user);
             Assert.IsInstanceOfType<IEquatable<IEntity<string>>>(user);
         }
     }

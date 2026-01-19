@@ -9,7 +9,7 @@ namespace ClearDomain.Tests.Identity
     /// <summary>
     /// Test identity user.
     /// </summary>
-    internal class TestIdentityUser : ClearDomainIdentityUser
+    internal sealed class TestIdentityUser : ClearDomainIdentityUser
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="TestIdentityUser"/> class.

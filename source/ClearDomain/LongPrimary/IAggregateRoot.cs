@@ -3,13 +3,14 @@
 // </copyright>
 
 using ClearDomain.Common;
+using NMediation.Abstractions;
 
 namespace ClearDomain.LongPrimary
 {
     /// <summary>
     /// Interface constraint for a <see cref="long"/> AggregateRoot.
     /// </summary>
-    public interface IAggregateRoot : IAggregateRoot<long, IDomainEvent>, IEntity
+    public interface IAggregateRoot : IAggregateRoot<long, IOccurrence>, IEntity
     {
     }
 }
