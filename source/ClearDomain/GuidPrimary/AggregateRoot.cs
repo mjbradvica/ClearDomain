@@ -12,13 +12,23 @@ namespace ClearDomain.GuidPrimary
     /// </summary>
     public abstract class AggregateRoot : AggregateRoot<Guid, IOccurrence>, IAggregateRoot
     {
+#if NET8_0
         /// <summary>
         /// Initializes a new instance of the <see cref="AggregateRoot"/> class.
         /// </summary>
         protected AggregateRoot()
-            : base(Guid.CreateVersion7())
+            : this(Guid.NewGuid())
         {
         }
+#else
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AggregateRoot"/> class.
+        /// </summary>
+        protected AggregateRoot()
+            : this(Guid.CreateVersion7())
+        {
+        }
+#endif
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AggregateRoot"/> class.

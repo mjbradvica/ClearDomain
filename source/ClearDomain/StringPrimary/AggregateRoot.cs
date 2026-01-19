@@ -12,13 +12,23 @@ namespace ClearDomain.StringPrimary
     /// </summary>
     public abstract class AggregateRoot : AggregateRoot<string, IOccurrence>, IAggregateRoot
     {
+#if NET8_0
         /// <summary>
         /// Initializes a new instance of the <see cref="AggregateRoot"/> class.
         /// </summary>
         protected AggregateRoot()
-            : base(Guid.CreateVersion7().ToString())
+            : this(Guid.NewGuid().ToString())
         {
         }
+#else
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AggregateRoot"/> class.
+        /// </summary>
+        protected AggregateRoot()
+            : this(Guid.CreateVersion7().ToString())
+        {
+        }
+#endif
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AggregateRoot"/> class.
