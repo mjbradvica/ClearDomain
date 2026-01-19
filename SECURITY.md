@@ -2,7 +2,7 @@
 
 ## Supported Versions
 
-The current versions are supported ClearDomain follows Microsoft's policy.
+The current versions are supported; ClearDomain follows Microsoft's policy.
 
 | Version | Dotnet | Supported          |
 | ------- | ------ | ------------------ |

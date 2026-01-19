@@ -15,7 +15,7 @@ namespace ClearDomain.StringPrimary
         /// Initializes a new instance of the <see cref="Entity"/> class.
         /// </summary>
         protected Entity()
-            : this(Guid.NewGuid().ToString())
+            : this(Guid.CreateVersion7().ToString())
         {
         }
 

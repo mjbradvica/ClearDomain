@@ -35,7 +35,7 @@ ClearDomain gives you:
     - [Entity Constraints](#entity-constraints)
     - [AggregateRoot Constraints](#aggregateroot-constraints)
     - [Entity \& AggregateRoot Encapsulation](#entity--aggregateroot-encapsulation)
-    - [Domain Events with MediatR or NServiceBus](#domain-events-with-mediatr-or-nservicebus)
+    - [Domain Events with other Publishers](#domain-events-with-other-publishers)
     - [Using a Different Identifier Type](#using-a-different-identifier-type)
   - [Identity User Creation](#identity-user-creation)
   - [Identity User Types](#identity-user-types)
@@ -92,6 +92,14 @@ ClearDomain-Identity provides:
 Equality in dotnet is confusing and difficult to grasp if you are not aware of all the rules. ClearDomain is an attempt to remove some of the nuance and semantics around equality. It also provides a foundation for writing solid software with a small set of classes and interfaces you can build upon.
 
 > You can still use ClearDomain even if your application is not strictly Domain Driven Design oriented.
+
+## Complimentary Libraries
+
+ClearDomain is part of the Simplex Software family, if you enjoy ClearDomain take a look at:
+
+[RapidLaunch uses ClearDomain Aggregate Roots.](https://github.com/mjbradvica/RapidLaunch)
+[NMedation is the underlying domain event for ClearDomain.](https://github.com/mjbradvica/NMediation)
+[FactoryFoundation for easy, type-safe mapping for entities.](https://github.com/mjbradvica/FactoryFoundation)
 
 ## Quick Start
 
@@ -230,6 +238,40 @@ public class CardUpdated : IOccurrence
 Use and publish a Domain Event when an Aggregate or model has something interesting to notify the rest of your application about.
 
 The main benefit of using events is the ability to decouple your application from hard dependencies by publishing events. Customers may subscribe to specific events to implement accordingly.
+
+[NMedation](https://github.com/mjbradvica/NMediation) is the best and easiest way to publish your domain events.
+
+#### Publishing Domain Events
+
+The easiest and best way to publish domain events in your application is to use [NMediation](https://github.com/mjbradvica/NMediation).
+
+The following is a simple example of saving an Aggregate Root and looping through all events to publish.
+
+```csharp
+public class MyRepository
+{
+    private readonly IMediation _mediation;
+    private readonly DbContext _context;
+
+    public MyRepository(IMediation mediation, DbContext context)
+    {
+        _mediation = mediation;
+        _context = context;
+    }
+
+    public async Task SaveRoot(MyAggregateRoot root)
+    {
+        await _context.SaveAsync(root);
+
+        await _context.SaveChangesAsync();
+
+        foreach(var domainEvent in root.DomainEvents)
+        {
+            await _mediation.Publish(domainEvent);
+        }
+    }
+}
+```
 
 ### Identity User
 
@@ -474,3 +516,7 @@ Finally, Aggregates are persisted via Repositories (not part of this package) an
 ### How is equality for Entities and AggregateRoots calculated?
 
 All equality is based on the [IEntity](https://github.com/mjbradvica/ClearDomain/blob/master/source/ClearDomain/Common/IEntity.cs) of type T interface. This is the most basic type in ClearDomain.
+
+### How do I publish Domain Events?
+
+Because you are already using the correct interface, [NMediation](https://github.com/mjbradvica/NMediation) is the easiest and best way to publish your events. It takes 5 minutes to set up.
