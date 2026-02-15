@@ -4,11 +4,11 @@
 
 The current versions are supported; ClearDomain follows Microsoft's policy.
 
-| Version | Dotnet | Supported          |
-| ------- | ------ | ------------------ |
-| 0.9.7   | 8/9/10 | :white_check_mark: |
-| 0.9.6   | 7/8/9  | :x:                |
-| < 0.9.5 | < 7    | :x:                |
+| Version    | Dotnet | Supported             |
+| ---------- | ------ | --------------------- |
+| >= 0.9.7   | 8/9/10 | :white_check_mark:    |
+| 0.9.6      | 7/8/9  | :x:                   |
+| <= 0.9.5   | < 7    | :x:                   |
 
 ## Reporting a Vulnerability
 
