@@ -2,7 +2,7 @@
 
 ## 7-14-2026
 
-- dotnet & other dependency updates
+- dotnet & peer dependency updates
 
 ## 6-6-2026
 
