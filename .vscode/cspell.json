@@ -1,14 +1,4 @@
 {
-    "words": [
-        "Bradvica",
-        "buildtransitive",
-        "contentfiles",
-        "hashcode",
-        "Mediat",
-        "minidisc",
-        "msbuild",
-        "nameof",
-        "nupkg",
-        "stylecop"
-    ]
+    "files": ["../.gitattributes"],
+    "words": ["Bradvica",]
 }
